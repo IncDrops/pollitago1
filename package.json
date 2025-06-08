@@ -6,6 +6,7 @@
     "build": "parcel build public/index.html --dist-dir dist"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^7.3.1",
     "canvas-confetti": "^1.9.3",
     "firebase": "^11.9.0",
     "parcel": "^2.0.0",

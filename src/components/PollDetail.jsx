@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
+
 
 const PollDetail = ({ poll, currentUserId, onBackToList, showMessage, onTipSuccess }) => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -17,6 +19,27 @@ const PollDetail = ({ poll, currentUserId, onBackToList, showMessage, onTipSucce
       });
     });
   };
+  
+    const handleTip = async (amount) => {
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ amount }),
+      });
+
+      if (!response.ok) throw new Error('Network response was not ok.');
+
+      const session = await response.json();
+      window.location.href = session.url;
+    } catch (error) {
+      showMessage('Something went wrong with the tip.', 'error');
+      console.error('Checkout error:', error);
+    }
+  };
+
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-gray-900 p-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
@@ -76,11 +99,11 @@ const PollDetail = ({ poll, currentUserId, onBackToList, showMessage, onTipSucce
         {/* Nav and Tip Buttons */}
         <div className="pt-4 flex justify-between items-center">
           <button onClick={onBackToList} className="text-sm text-blue-600 hover:underline">← Back to Polls</button>
-          <button
-            onClick={() => onTipSuccess(2)}
-            className="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-lg font-semibold transition transform hover:scale-105 animate-in fade-in slide-in-from-top-2"
-          >
-            Tip the Crowd ($2)
+           <button
+    onClick={handleTip}
+    className="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-lg font-semibold transition transform hover:scale-105 animate-in fade-in slide-in-from-top-2"
+  >
+    Tip the Crowd ($2)
           </button>
         </div>
       </div>
