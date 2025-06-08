@@ -15,6 +15,10 @@
     "stripe": "^18.2.1"
   },
   "devDependencies": {
-    "buffer": "^6.0.3"
+    "@tailwindcss/postcss": "^4.1.8",
+    "autoprefixer": "^10.4.21",
+    "buffer": "^6.0.3",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8"
   }
 }
