@@ -6,6 +6,7 @@
     "build": "parcel build public/index.html --dist-dir dist"
   },
   "dependencies": {
+    "canvas-confetti": "^1.9.3",
     "parcel": "^2.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
