@@ -6,7 +6,17 @@ import {
   signInWithCustomToken,
   onAuthStateChanged
 } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  updateDoc
+} from 'firebase/firestore';
+import { Buffer } from 'buffer';
+window.Buffer = Buffer;
+
 
 /**
  * FirebaseContext
