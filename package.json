@@ -10,7 +10,8 @@
     "firebase": "^11.9.0",
     "parcel": "^2.0.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "stripe": "^18.2.1"
   },
   "devDependencies": {
     "buffer": "^6.0.3"
