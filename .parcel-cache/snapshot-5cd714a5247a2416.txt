@@ -20610,7 +20610,7 @@
 49C:\pollitago_app\dist\confetti.module.77d709bf.js133939018914925700 0
 53C:\pollitago_app\dist\confetti.module.77d709bf.js.map133939018915303048 0
 33C:\pollitago_app\dist\favicon.svg133934026535839679 0
-32C:\pollitago_app\dist\index.html133939024065128261 0
+32C:\pollitago_app\dist\index.html133939026470447365 0
 40C:\pollitago_app\dist\public.41e7391d.js133939018914931147 0
 45C:\pollitago_app\dist\public.b90e3285.css.map133939018915297850 0
 50C:\pollitago_app\build\confetti.module.6bd29e62.js133938358675263323 0
