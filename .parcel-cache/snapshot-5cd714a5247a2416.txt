@@ -568,7 +568,7 @@
 61C:\pollitago_app\node_modules\sucrase\dist\types\Options.d.ts133938949586671634 0
 127C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\browser-cjs\src\api\authentication\create_auth_uri.d.ts133938949605829558 0
 66C:\pollitago_app\node_modules\firebase\auth\web-extension\dist\esm133938949741224210 1
-34C:\pollitago_app\public\index.html133939027515869517 0
+34C:\pollitago_app\public\index.html133939028399429846 0
 60C:\pollitago_app\node_modules\semver\functions\prerelease.js133938949422255773 0
 34C:\pollitago_app\node_modules\yaml133938949584183212 1
 63C:\pollitago_app\node_modules\tailwindcss\lib\cli\build\deps.js133938949572080834 0
@@ -20044,7 +20044,7 @@
 124C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\esm2017\src\core\util\instantiator.d.ts133938949733888833 0
 120C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\esm2017\src\core\util\location.d.ts133938949736976886 0
 115C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\esm2017\src\core\util\log.d.ts133938949737156773 0
-33C:\pollitago_app\build\index.html133938857770874726 0
+33C:\pollitago_app\build\index.html133939028865162392 0
 121C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\esm2017\src\core\util\navigator.d.ts133938949739675184 0
 121C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\esm2017\src\core\util\providers.d.ts133938949744082403 0
 116C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\esm2017\src\core\util\time.d.ts133938949749758827 0
@@ -20610,7 +20610,7 @@
 49C:\pollitago_app\dist\confetti.module.77d709bf.js133939018914925700 0
 53C:\pollitago_app\dist\confetti.module.77d709bf.js.map133939018915303048 0
 33C:\pollitago_app\dist\favicon.svg133934026535839679 0
-32C:\pollitago_app\dist\index.html133939026470447365 0
+32C:\pollitago_app\dist\index.html133939029461307058 0
 40C:\pollitago_app\dist\public.41e7391d.js133939018914931147 0
 45C:\pollitago_app\dist\public.b90e3285.css.map133939018915297850 0
 50C:\pollitago_app\build\confetti.module.6bd29e62.js133938358675263323 0
