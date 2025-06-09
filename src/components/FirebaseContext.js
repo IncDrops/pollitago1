@@ -37,14 +37,14 @@ export const FirebaseProvider = ({ children }) => {
       try {
         // Replace with your Firebase project config
         const firebaseConfig = {
-          apiKey: "AIzaSyBbygIbTA-KUOo4n8uMGEDj4LsAoD3JV-c",
-          authDomain: "pollitago-web-app.firebaseapp.com",
-          projectId: "pollitago-web-app",
-          storageBucket: "pollitago-web-app.firebasestorage.app",
-          messagingSenderId: "690089067831",
-          appId: "1:690089067831:web:e11838229a48a4e1ad46b2",
-          measurementId: "G-QDJ2CEFD0L"
-        };
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+};
 
         const app = initializeApp(firebaseConfig);
         const firestoreDb = getFirestore(app);

@@ -24,3 +24,5 @@
 /backend/node_modules # If backend has its own node_modules.vs/
 
 .vercel
+# Hide environment variables
+.env
