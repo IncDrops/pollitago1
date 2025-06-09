@@ -1,89 +1,47 @@
+// src/components/FirebaseContext.js
+
 import React, { createContext, useState, useEffect } from 'react';
-import { initializeApp } from 'firebase/app';
-import {
-  getAuth,
-  signInAnonymously,
-  signInWithCustomToken,
-  onAuthStateChanged
-} from 'firebase/auth';
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  addDoc,
-  doc,
-  updateDoc
-} from 'firebase/firestore';
-import { Buffer } from 'buffer';
-window.Buffer = Buffer;
+// Import the initialized Firebase app and services from your firebase.js file
+// Adjust the path '../src/firebase' if your folder structure is different
+import app, { auth, db } from '../src/firebase'; // Make sure auth and db are exported from firebase.js if you use them
 
-
-/**
- * FirebaseContext
- * Provides Firestore, Auth, userId, and auth status globally.
- */
+// Create the context
 export const FirebaseContext = createContext(null);
 
+// Create the FirebaseProvider component
 export const FirebaseProvider = ({ children }) => {
-  const [db, setDb] = useState(null);
-  const [auth, setAuth] = useState(null);
-  const [userId, setUserId] = useState(null);
-  const [isAuthReady, setIsAuthReady] = useState(false); // Track auth status
+    // You might use state/effects here to manage user data, loading states, etc.
+    const [currentUser, setCurrentUser] = useState(null);
+    const [loadingAuth, setLoadingAuth] = useState(true);
 
-  useEffect(() => {
-    let unsubscribeAuth = () => {}; // Fallback cleanup
-
-    const initFirebase = async () => {
-      try {
-        // Replace with your Firebase project config
-        const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
-};
-
-        const app = initializeApp(firebaseConfig);
-        const firestoreDb = getFirestore(app);
-        const firebaseAuth = getAuth(app);
-
-        setDb(firestoreDb);
-        setAuth(firebaseAuth);
-
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-        if (initialAuthToken) {
-          await signInWithCustomToken(firebaseAuth, initialAuthToken);
+    useEffect(() => {
+        // Example: Listen for auth state changes if you're using Firebase Auth
+        if (auth) { // Check if auth is defined (exported from firebase.js)
+            const unsubscribe = auth.onAuthStateChanged(user => {
+                setCurrentUser(user);
+                setLoadingAuth(false);
+            });
+            return () => unsubscribe(); // Clean up subscription
         } else {
-          await signInAnonymously(firebaseAuth);
+            setLoadingAuth(false); // If auth isn't used, stop loading immediately
         }
+    }, []);
 
-        unsubscribeAuth = onAuthStateChanged(firebaseAuth, (user) => {
-          if (user) {
-            setUserId(user.uid);
-          } else {
-            setUserId(null);
-          }
-          setIsAuthReady(true);
-        });
-
-      } catch (error) {
-        console.error("Error initializing Firebase or signing in:", error);
-        setIsAuthReady(true); // Still unblock UI
-      }
+    // The value provided to consumers of this context
+    const firebaseData = {
+        // Provide the initialized Firebase app and any services you need
+        app: app, 
+        auth: auth, // The Firebase Auth instance
+        db: db,     // The Firestore DB instance
+        currentUser: currentUser, // Current authenticated user
+        loadingAuth: loadingAuth, // Auth loading state
+        // Add any other Firebase-related data or functions you want to expose
     };
 
-    initFirebase();
-
-    return () => unsubscribeAuth(); // Clean up on unmount
-  }, []);
-
-  return (
-    <FirebaseContext.Provider value={{ db, auth, userId, isAuthReady }}>
-      {children}
-    </FirebaseContext.Provider>
-  );
+    // Render children within the provider
+    return (
+        <FirebaseContext.Provider value={firebaseData}>
+            {!loadingAuth ? children : <div>Loading Firebase...</div>} {/* Simple loading indicator */}
+        </FirebaseContext.Provider>
+    );
 };

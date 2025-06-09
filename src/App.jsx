@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+// src/App.jsx
+import React, { useState } from 'react';
 import PollList from './components/PollList.jsx';
-import PollDetail from './components/PollDetail.jsx';
-import { FirebaseProvider, FirebaseContext } from './components/FirebaseContext.js';
-import './components/PollCard.css';
-import SwipeCard from './components/SwipeCard';
-import { seedDummyPolls } from './utils/seedDummyPolls'; // ✅ correct path
+import PollDetail from './components/PollDetail.jsx'; // only if you have this component
+import { FirebaseProvider } from './components/FirebaseContext.js';
+import './components/PollCard.css'; // if you’ve styled cards here
+import { seedDummyPolls } from './utils/seedDummyPolls'; // optional, remove if not seeding
 
 const App = () => {
   const [selectedPoll, setSelectedPoll] = useState(null);
@@ -19,28 +19,11 @@ const App = () => {
     showMessage(`Thanks for tipping $${amount}!`, 'success');
   };
 
-  useEffect(() => {
-  const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log('✅ Signed in:', user.uid);
-    } else {
-      signInAnonymously(auth)
-        .then(() => {
-          console.log('✅ Signed in anonymously');
-        })
-        .catch((error) => {
-          console.error('❌ Anonymous sign-in failed:', error);
-        });
-    }
-  });
-}, []);
-
   return (
     <FirebaseProvider>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
-        
-        {/* ✅ Feedback message */}
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white p-4">
+
+        {/* Optional feedback message */}
         {message && (
           <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg z-50
             ${message.type === 'success' ? 'bg-green-500 text-white' : 'bg-blue-500 text-white'}`}>
@@ -48,8 +31,8 @@ const App = () => {
           </div>
         )}
 
-        {/* ✅ TEMP button to seed dummy polls */}
-        <div className="text-center py-4">
+        {/* Optional seeding button */}
+        <div className="text-center mb-4">
           <button
             onClick={seedDummyPolls}
             style={{
@@ -58,7 +41,6 @@ const App = () => {
               padding: '10px 20px',
               borderRadius: '10px',
               fontWeight: 'bold',
-              marginBottom: '20px',
               border: 'none',
               cursor: 'pointer'
             }}
@@ -67,13 +49,13 @@ const App = () => {
           </button>
         </div>
 
-        {/* ✅ Main UI */}
+        {/* Show PollList or PollDetail */}
         {!selectedPoll ? (
           <PollList onSelectPoll={setSelectedPoll} />
         ) : (
           <PollDetail
             poll={selectedPoll}
-            currentUserId={'user123'} // replace with actual ID if using auth
+            currentUserId={'user123'} // Replace with real user logic if needed
             onBackToList={() => setSelectedPoll(null)}
             showMessage={showMessage}
             onTipSuccess={handleTipSuccess}

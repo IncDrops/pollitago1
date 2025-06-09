@@ -1,3 +1,4 @@
+import '../firebase'; // ✅ Make sure firebase.js is in /src
 import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 

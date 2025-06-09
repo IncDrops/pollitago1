@@ -1,4 +1,4 @@
-20879
+20889
 108C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\cordova\test\helpers\mock_fetch.d.ts133938949739265450 0
 76C:\pollitago_app\node_modules\@swc\helpers\cjs\_async_generator_delegate.cjs133938949357825898 0
 45C:\pollitago_app\src\components\SwipeCard.jsx133939203186390687 0
@@ -6,7 +6,7 @@
 48C:\pollitago_app\node_modules\react\package.json133938949462949632 0
 98C:\pollitago_app\node_modules\@firebase\database\dist\node-esm\src\core\storage\MemoryStorage.d.ts133938949590019528 0
 96C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\node\src\model\user.d.ts133938949751597668 0
-21C:\pollitago_app\.env133939124151782397 0
+21C:\pollitago_app\.env133939286629972841 0
 73C:\pollitago_app\node_modules\firebase\data-connect\dist\compat\messaging133938949763770002 1
 128C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\cordova\test\integration\webdriver\util\test_runner.d.ts133938949749279133 0
 94C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\src\core\util\log.d.ts133938949737146781 0
@@ -27,7 +27,7 @@
 60C:\pollitago_app\node_modules\tar\dist\commonjs\extract.d.ts133938949586101995 0
 44C:\pollitago_app\node_modules\hasown\.github133938949356047020 1
 50C:\pollitago_app\node_modules\@types\node\sea.d.ts133938949532845567 0
-23C:\pollitago_app\public133939031795069530 1
+23C:\pollitago_app\public133939276078407044 1
 75C:\pollitago_app\node_modules\@swc\helpers\src\_assert_this_initialized.mjs133938949596955153 0
 54C:\pollitago_app\node_modules\postcss\lib\at-rule.d.ts133938949486065483 0
 85C:\pollitago_app\node_modules\firebase\analytics\dist\esm\compat\analytics\index.d.ts133938949623648324 0
@@ -81,16 +81,6 @@
 127C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\web-extension-cjs\src\platform_browser\auth_window.d.ts133938949602341763 0
 79C:\pollitago_app\node_modules\firebase\data-connect\dist\esm\compat\performance133938949764239705 1
 24C:\pollitago_app\.vercel133938932516107431 1
-51C:\pollitago_app\node_modules\yargs\build\lib\utils133938949450567439 1
-141C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\node-esm\src\platform_cordova\popup_redirect\events.d.ts133938949617482210 0
-69C:\pollitago_app\node_modules\firebase\storage\dist\esm\ai\index.d.ts133938949779310358 0
-54C:\pollitago_app\node_modules\tslib\modules\index.d.ts133938949414010480 0
-74C:\pollitago_app\node_modules\firebase\auth\dist\esm\compat\app\index.d.ts133938949739335402 0
-76C:\pollitago_app\node_modules\caniuse-lite\data\features\publickeypinning.js133938949611825779 0
-64C:\pollitago_app\node_modules\stripe\types\WebhookEndpoints.d.ts133938949607428550 0
-79C:\pollitago_app\node_modules\lmdb\dependencies\lmdb\libraries\liblmdb\mtest4.c133938949525859984 0
-37C:\pollitago_app\node_modules\@isaacs133938949338478095 1
-56C:\pollitago_app\node_modules\@parcel\cache\src\index.js133938949360794036 0
 24C:\pollitago_app\backend133938321415066112 1
 100C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\rn\index.js.map133938949585092638 0
 58C:\pollitago_app\node_modules\@firebase\functions\dist\src133938949464388724 1
@@ -140,6 +130,10 @@
 73C:\pollitago_app\node_modules\firebase\vertexai\dist\esm\compat\analytics133938949781119058 1
 68C:\pollitago_app\node_modules\firebase\compat\messaging\dist\storage133938949759522681 1
 36C:\pollitago_app\node_modules\dotenv133938949360004523 1
+44C:\pollitago_app\node_modules\object-inspect133938949406515211 1
+52C:\pollitago_app\node_modules\tslib\modules\index.js133938949386208007 0
+59C:\pollitago_app\node_modules\websocket-driver\package.json133938949426392674 0
+32C:\pollitago_app\src\firebase.js133939229405000389 0
 114C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\src\platform_browser\strategies\phone.d.ts133938949741144259 0
 62C:\pollitago_app\node_modules\yargs\lib\platform-shims\esm.mjs133938949535324003 0
 81C:\pollitago_app\node_modules\string-width-cjs\node_modules\strip-ansi\index.d.ts133938949349661051 0
@@ -150,7 +144,7 @@
 42C:\pollitago_app\node_modules\loose-envify133938949355337465 1
 122C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\node-esm\src\core\util\navigator.d.ts133938949739685177 0
 74C:\pollitago_app\node_modules\tar\dist\commonjs\strip-absolute-path.js.map133938949580825320 0
-22C:\pollitago_app\build133939035592721615 1
+22C:\pollitago_app\build133939233280551713 1
 113C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\web-extension-cjs\src\model\id_token.d.ts133938949621409738 0
 83C:\pollitago_app\node_modules\firebase\storage\dist\esm\compat\analytics\index.d.ts133938949779470100 0
 81C:\pollitago_app\node_modules\lmdb\dependencies\lmdb\libraries\liblmdb\mdb_drop.c133938949438745197 0
@@ -180,7 +174,7 @@
 49C:\pollitago_app\node_modules\thenify-all\LICENSE133938949350060794 0
 46C:\pollitago_app\node_modules\hasown\.eslintrc133938949349441190 0
 58C:\pollitago_app\node_modules\mkdirp\dist\mjs\index.js.map133938949373785837 0
-21C:\pollitago_app\dist133939203191257352 1
+21C:\pollitago_app\dist133939277368525444 1
 61C:\pollitago_app\node_modules\caniuse-lite\data\regions\SR.js133938949616402896 0
 81C:\pollitago_app\node_modules\firebase\auth\cordova\dist\esm\compat\installations133938949738056209 1
 65C:\pollitago_app\node_modules\@parcel\config-default\package.json133938949389236595 0
@@ -208,7 +202,7 @@
 120C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\web-extension-cjs\src\model\password_policy.d.ts133938949740274807 0
 71C:\pollitago_app\node_modules\firebase\firebase-app-check-compat.js.map133938949594606634 0
 30C:\pollitago_app\firebase.json133938105089082605 0
-53C:\pollitago_app\dist\confetti.module.1ee01aa0.js.map133939203188529070 0
+53C:\pollitago_app\dist\confetti.module.1ee01aa0.js.map133939277368475476 0
 77C:\pollitago_app\node_modules\@grpc\grpc-js\build\src\generated\channelz.d.ts133938949593147552 0
 134C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\browser-cjs\src\platform_browser\util\worker.d.ts133938949752467123 0
 78C:\pollitago_app\node_modules\firebase\remote-config\dist\app-check\index.d.ts133938949777281474 0
@@ -316,10 +310,7 @@
 74C:\pollitago_app\node_modules\stripe\esm\resources\Reporting\ReportRuns.js133938949585972079 0
 47C:\pollitago_app\node_modules\tailwindcss\peers133938949582784088 1
 81C:\pollitago_app\node_modules\@firebase\messaging-compat\dist\esm\test\fakes.d.ts133938949406715082 0
-20C:\pollitago_app\src133939165598848911 1
-60C:\pollitago_app\node_modules\resolve\test\resolver\dot_main133938949549105647 1
-77C:\pollitago_app\node_modules\@firebase\component\dist\esm\src\component.d.ts133938949415959256 0
-38C:\pollitago_app\src\utils\firebase.js133939210808687946 0
+20C:\pollitago_app\src133939249177935290 1
 87C:\pollitago_app\node_modules\@firebase\messaging\dist\esm\src\helpers\updateSwReg.d.ts133938949580405590 0
 31C:\pollitago_app\vite.config.js133938181318241965 0
 67C:\pollitago_app\node_modules\@parcel\core\src\public\Dependency.js133938949540410798 0
@@ -354,7 +345,7 @@
 45C:\pollitago_app\node_modules\brace-expansion133938949349091403 1
 74C:\pollitago_app\node_modules\@firebase\app-check\dist\esm\src\client.d.ts133938949452826327 0
 122C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\src\platform_browser\recaptcha\recaptcha_mock.d.ts133938949745611438 0
-28C:\pollitago_app\src\App.jsx133939188471744939 0
+28C:\pollitago_app\src\App.jsx133939222987339873 0
 74C:\pollitago_app\node_modules\tailwindcss\lib\lib\expandTailwindAtRules.js133938949574319424 0
 68C:\pollitago_app\node_modules\firebase\compat\storage\dist\messaging133938949763320282 1
 87C:\pollitago_app\node_modules\firebase\firestore\dist\esm\compat\performance\index.d.ts133938949767087904 0
@@ -370,7 +361,7 @@
 57C:\pollitago_app\node_modules\lightningcss-win32-x64-msvc133938949385089042 1
 90C:\pollitago_app\node_modules\@grpc\grpc-js\src\generated\grpc\channelz\v1\ChannelTrace.ts133938949592957677 0
 88C:\pollitago_app\node_modules\caniuse-lite\data\features\justify-content-space-evenly.js133938949604590343 0
-44C:\pollitago_app\src\components\PollList.jsx133938309593915118 0
+44C:\pollitago_app\src\components\PollList.jsx133939245007811354 0
 71C:\pollitago_app\node_modules\call-bind-apply-helpers\functionCall.d.ts133938949359354935 0
 87C:\pollitago_app\node_modules\@firebase\installations-compat\dist\src\testing\util.d.ts133938949431359545 0
 99C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\node\src\api\authentication133938949750188566 1
@@ -383,7 +374,7 @@
 114C:\pollitago_app\node_modules\@firebase\firestore\dist\firestore\test\unit\specs\garbage_collection_spec.test.d.ts133938949616243002 0
 57C:\pollitago_app\node_modules\tar\dist\esm\extract.js.map133938949500865886 0
 54C:\pollitago_app\node_modules\tailwindcss\variants.css133938949454405018 0
-31C:\pollitago_app\src\components133939166266048917 1
+31C:\pollitago_app\src\components133939218314975419 1
 54C:\pollitago_app\node_modules\react\jsx-dev-runtime.js133938949408014262 0
 76C:\pollitago_app\node_modules\@parcel\error-overlay\src\utils\stack-frame.js133938949382010664 0
 53C:\pollitago_app\node_modules\y18n\build\lib\index.js133938949349391216 0
@@ -401,6 +392,28 @@
 87C:\pollitago_app\node_modules\firebase\remote-config\dist\auth\web-extension\index.d.ts133938949777371428 0
 63C:\pollitago_app\node_modules\postcss-selector-parser\dist\util133938949383580147 1
 75C:\pollitago_app\node_modules\stripe\types\TestHelpers\RefundsResource.d.ts133938949602151881 0
+35C:\pollitago_app\public\favicon.svg133934026535839679 0
+40C:\pollitago_app\node_modules\color-name133938949348361865 1
+40C:\pollitago_app\node_modules\ansi-regex133938949349311267 1
+117C:\pollitago_app\node_modules\@firebase\firestore\dist\lite\firestore\test\unit\specs\existence_filter_spec.test.d.ts133938949611535965 0
+65C:\pollitago_app\node_modules\stripe\types\TransferReversals.d.ts133938949605849546 0
+68C:\pollitago_app\node_modules\firebase\firebase-remote-config.js.map133938949609127480 0
+61C:\pollitago_app\node_modules\tar\dist\commonjs\read-entry.js133938949404996163 0
+58C:\pollitago_app\node_modules\tar\dist\commonjs\types.d.ts133938949588920222 0
+61C:\pollitago_app\node_modules\@parcel\transformer-css\LICENSE133938949373985912 0
+49C:\pollitago_app\node_modules\qs\lib\stringify.js133938949357845885 0
+46C:\pollitago_app\node_modules\semver\README.md133938949464218830 0
+31C:\pollitago_app\src\index.html133939233981036805 0
+76C:\pollitago_app\node_modules\web-vitals\dist\modules\attribution\onFCP.d.ts133938949579865928 0
+78C:\pollitago_app\node_modules\firebase\analytics\dist\esm\compat\remote-config133938949623908166 1
+75C:\pollitago_app\node_modules\firebase\database\dist\esm\compat\performance133938949765708783 1
+69C:\pollitago_app\node_modules\@swc\helpers\esm\_async_to_generator.js133938949571431254 0
+70C:\pollitago_app\node_modules\yaml\browser\dist\schema\yaml-1.1\set.js133938949573300065 0
+77C:\pollitago_app\node_modules\@firebase\database\dist\node-esm\src\index.d.ts133938949588170692 0
+80C:\pollitago_app\node_modules\firebase\auth\dist\compat\remote-config\index.d.ts133938949739045581 0
+70C:\pollitago_app\node_modules\tar\dist\commonjs\path-reservations.d.ts133938949588200671 0
+57C:\pollitago_app\node_modules\tapable\lib\SyncBailHook.js133938949428441391 0
+87C:\pollitago_app\node_modules\firebase\auth\web-extension\dist\esm\compat\remote-config133938949740904410 1
 86C:\pollitago_app\node_modules\@swc\helpers\cjs\_class_apply_descriptor_destructure.cjs133938949360234383 0
 70C:\pollitago_app\node_modules\firebase\functions\dist\compat\firestore133938949769256542 1
 66C:\pollitago_app\node_modules\yaml\dist\compose\resolve-props.d.ts133938949588470505 0
@@ -409,7 +422,7 @@
 119C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\rn\test\integration\webdriver\util\ui_page.d.ts133938949750888115 0
 56C:\pollitago_app\node_modules\tailwindcss\peers\index.js133938949588360570 0
 29C:\pollitago_app\src\index.js133939050534491065 0
-26C:\pollitago_app\src\utils133939197710988281 1
+26C:\pollitago_app\src\utils133939249177935290 1
 58C:\pollitago_app\node_modules\@parcel\watcher\node_modules133938949788044697 1
 56C:\pollitago_app\node_modules\side-channel-list\index.js133938949353678513 0
 71C:\pollitago_app\node_modules\stripe\esm\resources\TestHelpers\Treasury133938949584632918 1
@@ -417,7 +430,7 @@
 80C:\pollitago_app\node_modules\firebase\database\dist\compat\analytics\index.d.ts133938949765029203 0
 130C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\web-extension-esm2017\src\platform_browser\util\popup.d.ts133938949742443447 0
 49C:\pollitago_app\node_modules\type-fest\base.d.ts133938949355977064 0
-44C:\pollitago_app\src\utils\seedDummyPolls.js133939171604825050 0
+44C:\pollitago_app\src\utils\seedDummyPolls.js133939252745049753 0
 36C:\pollitago_app\node_modules\@alloc133938949338138311 1
 172C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\web-extension-esm2017\src\platform_browser\recaptcha\recaptcha_enterprise_verifier.d.ts133938949745421559 0
 145C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\esm2017\src\platform_browser\recaptcha\recaptcha_enterprise_verifier.d.ts133938949744951872 0
@@ -437,7 +450,7 @@
 38C:\pollitago_app\src\.vs\src\v17\.wsuo133938933267750000 0
 94C:\pollitago_app\node_modules\@grpc\grpc-js\build\src\generated\grpc\channelz\v1\ServerData.js133938949571161412 0
 97C:\pollitago_app\node_modules\@stripe\stripe-js\dist\stripe-js\elements\link-authentication.d.mts133938949582993957 0
-50C:\pollitago_app\src\components\FirebaseContext.js133939128053725916 0
+50C:\pollitago_app\src\components\FirebaseContext.js133939244317505614 0
 65C:\pollitago_app\node_modules\web-vitals\src\lib\whenActivated.ts133938949583943359 0
 71C:\pollitago_app\node_modules\minimatch\dist\esm\brace-expressions.d.ts133938949438604977 0
 64C:\pollitago_app\node_modules\tailwindcss\src\util\colorNames.js133938949515576455 0
@@ -537,13 +550,6 @@
 81C:\pollitago_app\node_modules\postcss-selector-parser\dist\selectors\container.js133938949354418052 0
 50C:\pollitago_app\src\.vs\src\copilot-chat\ec21adfc133938328694721198 1
 70C:\pollitago_app\node_modules\firebase\compat\database\dist\compat\app133938949749009304 1
-35C:\pollitago_app\public\favicon.svg133934026535839679 0
-40C:\pollitago_app\node_modules\color-name133938949348361865 1
-40C:\pollitago_app\node_modules\ansi-regex133938949349311267 1
-117C:\pollitago_app\node_modules\@firebase\firestore\dist\lite\firestore\test\unit\specs\existence_filter_spec.test.d.ts133938949611535965 0
-65C:\pollitago_app\node_modules\stripe\types\TransferReversals.d.ts133938949605849546 0
-68C:\pollitago_app\node_modules\firebase\firebase-remote-config.js.map133938949609127480 0
-61C:\pollitago_app\node_modules\tar\dist\commonjs\read-entry.js133938949404996163 0
 65C:\pollitago_app\node_modules\mkdirp\dist\cjs\src\path-arg.js.map133938949420766223 0
 96C:\pollitago_app\node_modules\@firebase\database\dist\node-esm\src\core\operation\Operation.d.ts133938949591008904 0
 55C:\pollitago_app\node_modules\stripe\types\Payouts.d.ts133938949600942637 0
@@ -555,7 +561,7 @@
 61C:\pollitago_app\node_modules\sucrase\dist\types\Options.d.ts133938949586671634 0
 127C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\browser-cjs\src\api\authentication\create_auth_uri.d.ts133938949605829558 0
 66C:\pollitago_app\node_modules\firebase\auth\web-extension\dist\esm133938949741224210 1
-34C:\pollitago_app\public\index.html133939050965129391 0
+34C:\pollitago_app\public\index.html133939236715022044 0
 60C:\pollitago_app\node_modules\semver\functions\prerelease.js133938949422255773 0
 34C:\pollitago_app\node_modules\yaml133938949584183212 1
 63C:\pollitago_app\node_modules\tailwindcss\lib\cli\build\deps.js133938949572080834 0
@@ -567,6 +573,16 @@
 109C:\pollitago_app\node_modules\@firebase\auth-compat\dist\esm\auth-compat\test\integration\flows\idp.test.d.ts133938949528308425 0
 63C:\pollitago_app\node_modules\mkdirp\dist\cjs\src\use-native.js133938949357496109 0
 39C:\pollitago_app\node_modules\@firebase133938949338498083 1
+51C:\pollitago_app\node_modules\yargs\build\lib\utils133938949450567439 1
+141C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\node-esm\src\platform_cordova\popup_redirect\events.d.ts133938949617482210 0
+69C:\pollitago_app\node_modules\firebase\storage\dist\esm\ai\index.d.ts133938949779310358 0
+54C:\pollitago_app\node_modules\tslib\modules\index.d.ts133938949414010480 0
+74C:\pollitago_app\node_modules\firebase\auth\dist\esm\compat\app\index.d.ts133938949739335402 0
+76C:\pollitago_app\node_modules\caniuse-lite\data\features\publickeypinning.js133938949611825779 0
+64C:\pollitago_app\node_modules\stripe\types\WebhookEndpoints.d.ts133938949607428550 0
+79C:\pollitago_app\node_modules\lmdb\dependencies\lmdb\libraries\liblmdb\mtest4.c133938949525859984 0
+37C:\pollitago_app\node_modules\@isaacs133938949338478095 1
+56C:\pollitago_app\node_modules\@parcel\cache\src\index.js133938949360794036 0
 86C:\pollitago_app\node_modules\firebase\compat\storage\dist\compat\messaging\index.d.ts133938949762440838 0
 83C:\pollitago_app\node_modules\firebase\compat\functions\dist\esm\auth\web-extension133938949753946187 1
 51C:\pollitago_app\node_modules\yargs\locales\th.json133938949515137050 0
@@ -600,8 +616,8 @@
 60C:\pollitago_app\node_modules\@firebase\performance\dist\src133938949501305451 1
 72C:\pollitago_app\node_modules\web-vitals\dist\modules\lib\doubleRAF.d.ts133938949546526942 0
 147C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\node-esm\test\integration\flows\middleware_test_generator.d.ts133938949738725783 0
-84C:\pollitago_app\node_modules\firebase\data-connect\dist\compat\firestore\index.d.ts133938949763700037 0
 39C:\pollitago_app\node_modules\@mischnic133938949338278221 1
+84C:\pollitago_app\node_modules\firebase\data-connect\dist\compat\firestore\index.d.ts133938949763700037 0
 99C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\browser-cjs\index.node.d.ts133938949625187358 0
 72C:\pollitago_app\node_modules\caniuse-lite\data\features\css3-tabsize.js133938949593567290 0
 66C:\pollitago_app\node_modules\stripe\esm\resources\CountrySpecs.js133938949524181501 0
@@ -1490,9 +1506,6 @@
 53C:\pollitago_app\node_modules\idb\with-async-ittr.cjs133938949387876957 0
 69C:\pollitago_app\node_modules\caniuse-lite\data\features\dragndrop.js133938949595386147 0
 51C:\pollitago_app\node_modules\@parcel\namer-default133938949386847612 1
-44C:\pollitago_app\node_modules\object-inspect133938949406515211 1
-52C:\pollitago_app\node_modules\tslib\modules\index.js133938949386208007 0
-59C:\pollitago_app\node_modules\websocket-driver\package.json133938949426392674 0
 70C:\pollitago_app\node_modules\scheduler\umd\scheduler.profiling.min.js133938949358825270 0
 78C:\pollitago_app\node_modules\@stripe\stripe-js\dist\api\payment-methods.d.mts133938949520633268 0
 121C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\web-extension-cjs\src\core\credentials\phone.d.ts133938949741164254 0
@@ -1758,9 +1771,6 @@
 39C:\pollitago_app\node_modules\term-size133938949357985802 1
 76C:\pollitago_app\node_modules\caniuse-lite\data\features\addeventlistener.js133938949419227194 0
 62C:\pollitago_app\node_modules\stripe\types\PromotionCodes.d.ts133938949601392355 0
-58C:\pollitago_app\node_modules\resolve\test\node_path\y\bbb133938949435427156 1
-76C:\pollitago_app\node_modules\firebase\storage\dist\esm\firestore\index.d.ts133938949779830031 0
-57C:\pollitago_app\node_modules\yaml\dist\doc\Document.d.ts133938949586401807 0
 58C:\pollitago_app\node_modules\weak-lru-cache\tests\test.js133938949355687250 0
 68C:\pollitago_app\node_modules\sucrase\dist\parser\util\whitespace.js133938949581305018 0
 41C:\pollitago_app\node_modules\thenify-all133938949351719747 1
@@ -1890,9 +1900,6 @@
 60C:\pollitago_app\node_modules\resolve\test\faulty_basedir.js133938949361323703 0
 48C:\pollitago_app\node_modules\yargs-parser\build133938949348042074 1
 80C:\pollitago_app\node_modules\@firebase\storage-compat\dist\esm\src\service.d.ts133938949453635500 0
-66C:\pollitago_app\node_modules\firebase\messaging\sw\dist\app-check133938949774233585 1
-82C:\pollitago_app\node_modules\firebase\functions\dist\esm\remote-config\index.d.ts133938949770865842 0
-72C:\pollitago_app\node_modules\type-fest\source\require-at-least-one.d.ts133938949401338468 0
 106C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\rn\src\platform_cordova\strategies133938949746960600 1
 67C:\pollitago_app\node_modules\wrap-ansi-cjs\node_modules\strip-ansi133938949349351241 1
 70C:\pollitago_app\node_modules\yaml\dist\stringify\stringifyNumber.d.ts133938949589509849 0
@@ -2191,7 +2198,7 @@
 56C:\pollitago_app\node_modules\yargs\build\lib\argsert.js133938949399989323 0
 56C:\pollitago_app\node_modules\yaml\dist\schema\Schema.js133938949572800380 0
 67C:\pollitago_app\node_modules\firebase\ai\dist\esm\compat\messaging133938949622309170 1
-42C:\pollitago_app\dist\favicon.e6fd13b9.svg133939203188239260 0
+42C:\pollitago_app\dist\favicon.e6fd13b9.svg133939218319322497 0
 77C:\pollitago_app\node_modules\@firebase\analytics\dist\esm\testing\setup.d.ts133938949512828647 0
 86C:\pollitago_app\node_modules\firebase\compat\auth\dist\esm\compat\database\index.d.ts133938949748019923 0
 108C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\rn\index.webworker.d.ts133938949703058266 0
@@ -2623,6 +2630,9 @@
 59C:\pollitago_app\node_modules\yaml\dist\doc\directives.d.ts133938949586331851 0
 54C:\pollitago_app\node_modules\resolve\test\node_path\x133938949428621690 1
 83C:\pollitago_app\node_modules\firebase\compat\storage\dist\esm\compat\index.rn.d.ts133938949786995531 0
+58C:\pollitago_app\node_modules\resolve\test\node_path\y\bbb133938949435427156 1
+76C:\pollitago_app\node_modules\firebase\storage\dist\esm\firestore\index.d.ts133938949779830031 0
+57C:\pollitago_app\node_modules\yaml\dist\doc\Document.d.ts133938949586401807 0
 77C:\pollitago_app\node_modules\@vercel\speed-insights\dist\remix\index.mjs.map133939007259568679 0
 46C:\pollitago_app\build\public.917ad841.css.map133938196503129548 0
 77C:\pollitago_app\node_modules\lmdb\dependencies\lmdb\libraries\liblmdb\lmdb.h133938949572160786 0
@@ -2897,20 +2907,6 @@
 72C:\pollitago_app\node_modules\caniuse-lite\data\features\svg-fragment.js133938949616782655 0
 68C:\pollitago_app\node_modules\@firebase\ai\dist\esm\src\service.d.ts133938949580215707 0
 72C:\pollitago_app\node_modules\yaml\browser\dist\schema\yaml-1.1\pairs.js133938949537532613 0
-58C:\pollitago_app\node_modules\tar\dist\commonjs\types.d.ts133938949588920222 0
-61C:\pollitago_app\node_modules\@parcel\transformer-css\LICENSE133938949373985912 0
-49C:\pollitago_app\node_modules\qs\lib\stringify.js133938949357845885 0
-76C:\pollitago_app\node_modules\web-vitals\dist\modules\attribution\onFCP.d.ts133938949579865928 0
-78C:\pollitago_app\node_modules\firebase\analytics\dist\esm\compat\remote-config133938949623908166 1
-46C:\pollitago_app\node_modules\semver\README.md133938949464218830 0
-75C:\pollitago_app\node_modules\firebase\database\dist\esm\compat\performance133938949765708783 1
-69C:\pollitago_app\node_modules\@swc\helpers\esm\_async_to_generator.js133938949571431254 0
-70C:\pollitago_app\node_modules\yaml\browser\dist\schema\yaml-1.1\set.js133938949573300065 0
-77C:\pollitago_app\node_modules\@firebase\database\dist\node-esm\src\index.d.ts133938949588170692 0
-80C:\pollitago_app\node_modules\firebase\auth\dist\compat\remote-config\index.d.ts133938949739045581 0
-70C:\pollitago_app\node_modules\tar\dist\commonjs\path-reservations.d.ts133938949588200671 0
-57C:\pollitago_app\node_modules\tapable\lib\SyncBailHook.js133938949428441391 0
-87C:\pollitago_app\node_modules\firebase\auth\web-extension\dist\esm\compat\remote-config133938949740904410 1
 67C:\pollitago_app\node_modules\@parcel\reporter-cli\src\logLevels.js133938949415799350 0
 136C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\web-extension-cjs\test\integration\webdriver\util\functions.d.ts133938949618791387 0
 67C:\pollitago_app\node_modules\tailwindcss\lib\util\resolveConfig.js133938949593207522 0
@@ -3913,6 +3909,9 @@
 67C:\pollitago_app\node_modules\mkdirp\dist\cjs\src\opts-arg.d.ts.map133938949402627654 0
 80C:\pollitago_app\node_modules\firebase\auth\cordova\dist\esm\vertexai\index.d.ts133938949738425969 0
 65C:\pollitago_app\node_modules\type-fest\source\readonly-deep.d.ts133938949397191403 0
+66C:\pollitago_app\node_modules\firebase\messaging\sw\dist\app-check133938949774233585 1
+82C:\pollitago_app\node_modules\firebase\functions\dist\esm\remote-config\index.d.ts133938949770865842 0
+72C:\pollitago_app\node_modules\type-fest\source\require-at-least-one.d.ts133938949401338468 0
 63C:\pollitago_app\node_modules\stripe\types\ReviewsResource.d.ts133938949602431701 0
 71C:\pollitago_app\node_modules\type-fest\source\require-exactly-one.d.ts133938949404536453 0
 48C:\pollitago_app\node_modules\@parcel\diagnostic133938949393593352 1
@@ -5100,7 +5099,7 @@
 52C:\pollitago_app\node_modules\postcss\lib\warning.js133938949465518012 0
 73C:\pollitago_app\node_modules\tailwindcss\lib\util\flattenColorPalette.js133938949579236323 0
 78C:\pollitago_app\node_modules\firebase\firestore\dist\esm\compat\index.rn.d.ts133938949787125463 0
-41C:\pollitago_app\dist\public.d91c94e1.css133939203188239260 0
+41C:\pollitago_app\dist\public.d91c94e1.css133939277368105712 0
 75C:\pollitago_app\node_modules\tailwindcss\lib\util\formatVariantSelector.js133938949579436200 0
 77C:\pollitago_app\node_modules\foreground-child\dist\commonjs\proxy-signals.js133938949351669785 0
 55C:\pollitago_app\node_modules\fast-glob\out\settings.js133938949359814644 0
@@ -7036,6 +7035,7 @@
 52C:\pollitago_app\node_modules\picomatch\lib\parse.js133938949349371236 0
 79C:\pollitago_app\node_modules\@grpc\grpc-js\build\src\generated\google\protobuf133938949602901405 1
 65C:\pollitago_app\node_modules\resolve\test\resolver\browser_field133938949545907682 1
+60C:\pollitago_app\node_modules\resolve\test\resolver\dot_main133938949549105647 1
 104C:\pollitago_app\node_modules\@firebase\firestore\dist\lite\firestore\src\lite-api\user_data_writer.d.ts133938949736717049 0
 81C:\pollitago_app\node_modules\firebase\compat\installations\dist\index.cjs.js.map133938949610476632 0
 62C:\pollitago_app\node_modules\resolve\test\resolver\false_main133938949550444505 1
@@ -15384,6 +15384,7 @@
 113C:\pollitago_app\node_modules\@stripe\stripe-js\dist\stripe-js\elements\issuing\issuing-card-expiry-display.d.mts133938949584722866 0
 43C:\pollitago_app\node_modules\fastq\LICENSE133938949345483685 0
 45C:\pollitago_app\node_modules\fastq\README.md133938949353698500 0
+51C:\pollitago_app\dist\pollitago_app.64b87d6c.js.map133939252754214003 0
 136C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\node\src\platform_browser\messagechannel\index.d.ts133938949624058069 0
 47C:\pollitago_app\node_modules\fastq\SECURITY.md133938949354398065 0
 67C:\pollitago_app\node_modules\@parcel\types-internal\lib\Cache.d.ts133938949360893963 0
@@ -16154,7 +16155,7 @@
 56C:\pollitago_app\node_modules\@parcel\optimizer-html\lib133938949376334234 1
 121C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\src\core\auth\firebase_internal.d.ts133938949618651475 0
 73C:\pollitago_app\node_modules\caniuse-lite\data\features\queryselector.js133938949611975688 0
-40C:\pollitago_app\dist\public.31b563d9.js133939203191027670 0
+40C:\pollitago_app\dist\public.31b563d9.js133939218323469909 0
 75C:\pollitago_app\node_modules\caniuse-lite\data\features\referrer-policy.js133938949613495064 0
 83C:\pollitago_app\node_modules\caniuse-lite\data\features\registerprotocolhandler.js133938949614234681 0
 77C:\pollitago_app\node_modules\@firebase\messaging\dist\src\testing\setup.d.ts133938949573320060 0
@@ -16266,6 +16267,7 @@
 69C:\pollitago_app\node_modules\call-bind-apply-helpers\functionCall.js133938949354927727 0
 71C:\pollitago_app\node_modules\@firebase\performance-compat\package.json133938949393163630 0
 64C:\pollitago_app\node_modules\call-bind-apply-helpers\index.d.ts133938949359654755 0
+44C:\pollitago_app\dist\public.64b87d6c.js.map133939277368505466 0
 61C:\pollitago_app\node_modules\call-bind-apply-helpers\LICENSE133938949351869654 0
 66C:\pollitago_app\node_modules\call-bind-apply-helpers\package.json133938949357186302 0
 71C:\pollitago_app\node_modules\@parcel\utils\test\input\config\config.js133938949415969248 0
@@ -17164,6 +17166,7 @@
 66C:\pollitago_app\node_modules\@protobufjs\aspromise\tests\index.js133938949355137593 0
 55C:\pollitago_app\node_modules\@pkgjs\parseargs\examples133938949357835892 1
 73C:\pollitago_app\node_modules\@firebase\remote-config\dist\src\value.d.ts133938949514097387 0
+51C:\pollitago_app\dist\pollitago_app.91e0a675.js.map133939258554939585 0
 55C:\pollitago_app\node_modules\@pkgjs\parseargs\index.js133938949349101399 0
 119C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\rn\src\core\user\account_info.d.ts133938949593327444 0
 55C:\pollitago_app\node_modules\@pkgjs\parseargs\internal133938949355857140 1
@@ -17951,7 +17954,7 @@
 63C:\pollitago_app\node_modules\@grpc\grpc-js\src\resolver-uds.ts133938949597864578 0
 62C:\pollitago_app\node_modules\@grpc\grpc-js\src\server-call.ts133938949598384253 0
 65C:\pollitago_app\node_modules\@grpc\grpc-js\src\service-config.ts133938949601042577 0
-45C:\pollitago_app\dist\public.d91c94e1.css.map133939203188539063 0
+45C:\pollitago_app\dist\public.d91c94e1.css.map133939277368465676 0
 107C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\cordova\src\index.d.ts133938949623158633 0
 65C:\pollitago_app\node_modules\@grpc\grpc-js\src\stream-decoder.ts133938949601842075 0
 61C:\pollitago_app\node_modules\@grpc\grpc-js\src\subchannel.ts133938949602441695 0
@@ -18604,7 +18607,9 @@
 68C:\pollitago_app\node_modules\@firebase\firestore-types\package.json133938949375874523 0
 61C:\pollitago_app\node_modules\@firebase\firestore-compat\dist133938949464258806 1
 69C:\pollitago_app\node_modules\@firebase\firestore-compat\package.json133938949419666917 0
+48C:\pollitago_app\dist\pollitago_app.aa436662.css133939252753484447 0
 78C:\pollitago_app\node_modules\@firebase\firestore-compat\dist\index.esm2017.js133938949397201080 0
+52C:\pollitago_app\dist\pollitago_app.aa436662.css.map133939252753534417 0
 82C:\pollitago_app\node_modules\@firebase\firestore-compat\dist\index.esm2017.js.map133938949429590662 0
 79C:\pollitago_app\node_modules\@firebase\firestore-compat\dist\index.node.cjs.js133938949403886864 0
 73C:\pollitago_app\node_modules\@firebase\firestore-compat\dist\index.rn.js133938949414230647 0
@@ -19086,7 +19091,7 @@
 104C:\pollitago_app\node_modules\@firebase\firestore\dist\firestore\test\integration\api\provider.test.d.ts133938949622369132 0
 101C:\pollitago_app\node_modules\@firebase\firestore\dist\firestore\test\integration\api\query.test.d.ts133938949622648957 0
 112C:\pollitago_app\node_modules\@firebase\firestore\dist\firestore\test\integration\api\server_timestamp.test.d.ts133938949624437830 0
-44C:\pollitago_app\dist\public.31b563d9.js.map133939203191237557 0
+44C:\pollitago_app\dist\public.31b563d9.js.map133939218323719738 0
 120C:\pollitago_app\node_modules\@firebase\firestore\dist\firestore\test\integration\api\snapshot_listener_source.test.d.ts133938949624937516 0
 100C:\pollitago_app\node_modules\@firebase\firestore\dist\firestore\test\integration\api\type.test.d.ts133938949735657723 0
 73C:\pollitago_app\node_modules\@firebase\firestore\dist\firestore\src\auth133938949736737039 1
@@ -19547,6 +19552,7 @@
 79C:\pollitago_app\node_modules\@firebase\component\dist\esm\index.esm2017.js.map133938949400878761 0
 62C:\pollitago_app\node_modules\@firebase\component\dist\esm\src133938949445110897 1
 73C:\pollitago_app\node_modules\@firebase\component\dist\esm\test\util.d.ts133938949451716716 0
+77C:\pollitago_app\node_modules\@firebase\component\dist\esm\src\component.d.ts133938949415959256 0
 77C:\pollitago_app\node_modules\@firebase\component\dist\esm\src\constants.d.ts133938949420616315 0
 73C:\pollitago_app\node_modules\@firebase\component\dist\esm\src\types.d.ts133938949445790449 0
 61C:\pollitago_app\node_modules\@firebase\auth-types\index.d.ts133938949385768286 0
@@ -20304,7 +20310,6 @@
 124C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\esm2017\src\core\util\instantiator.d.ts133938949733888833 0
 120C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\esm2017\src\core\util\location.d.ts133938949736976886 0
 115C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\esm2017\src\core\util\log.d.ts133938949737156773 0
-33C:\pollitago_app\build\index.html133939031952261959 0
 121C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\esm2017\src\core\util\navigator.d.ts133938949739675184 0
 121C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\esm2017\src\core\util\providers.d.ts133938949744082403 0
 116C:\pollitago_app\node_modules\@firebase\auth-compat\node_modules\@firebase\auth\dist\esm2017\src\core\util\time.d.ts133938949749758827 0
@@ -20861,10 +20866,15 @@
 39C:\pollitago_app\node_modules\.bin\yaml133938949788264559 0
 43C:\pollitago_app\node_modules\.bin\yaml.cmd133938949788264559 0
 43C:\pollitago_app\node_modules\.bin\yaml.ps1133938949788264559 0
-49C:\pollitago_app\dist\confetti.module.1ee01aa0.js133939203188239260 0
-49C:\pollitago_app\dist\confetti.module.77d709bf.js133939074507907785 0
-53C:\pollitago_app\dist\confetti.module.77d709bf.js.map133939074508326613 0
-32C:\pollitago_app\dist\index.html133939203188239260 0
+49C:\pollitago_app\dist\confetti.module.1ee01aa0.js133939277368105712 0
+49C:\pollitago_app\dist\confetti.module.77d709bf.js133939258554085886 0
+53C:\pollitago_app\dist\confetti.module.77d709bf.js.map133939258554918591 0
+32C:\pollitago_app\dist\index.html133939277368105712 0
+47C:\pollitago_app\dist\pollitago_app.64b87d6c.js133939252754014126 0
+48C:\pollitago_app\dist\pollitago_app.698edd1f.css133939258554091094 0
+52C:\pollitago_app\dist\pollitago_app.698edd1f.css.map133939258554880860 0
+47C:\pollitago_app\dist\pollitago_app.91e0a675.js133939258554101462 0
+40C:\pollitago_app\dist\public.64b87d6c.js133939277368285609 0
 45C:\pollitago_app\dist\public.b90e3285.css.map133939074508277446 0
 40C:\pollitago_app\dist\public.ff40e864.js133939074507913104 0
 44C:\pollitago_app\dist\public.ff40e864.js.map133939074508336600 0
