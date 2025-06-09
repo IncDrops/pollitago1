@@ -18,16 +18,11 @@ const firebaseConfig = {
   measurementId: process.env.PARCEL_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-// Initialize Firebase
+// ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Export any initialized Firebase services you need to use elsewhere
-// If you use Firebase Authentication, UNCOMMENT the line below:
-// export const auth = getAuth(app); 
-// If you use Firestore Database, UNCOMMENT the line below:
-// export const db = getFirestore(app); 
+// ✅ Export both auth and db so you can use them elsewhere
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-export default app; // Export the initialized Firebase app instance itself
-
-// IMPORTANT: Do NOT reference STRIPE_SECRET_KEY here or anywhere in your src/ folder.
-// That key is ONLY for your backend server (e.g., api/create-tip.js or backend/server.js).
+export { app as default, auth, db };
