@@ -1,6 +1,8 @@
 // src/firebase.js file (This file initializes Firebase ONCE)
 
 import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth'; // ✅ THIS WAS MISSING
+import { getFirestore } from 'firebase/firestore';
 // Add imports for any specific Firebase services you use based on your app's needs
 // If you use Firebase Authentication, UNCOMMENT the line below:
 // import { getAuth } from 'firebase/auth'; 
