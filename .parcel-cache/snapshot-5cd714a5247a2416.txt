@@ -568,7 +568,7 @@
 61C:\pollitago_app\node_modules\sucrase\dist\types\Options.d.ts133938949586671634 0
 127C:\pollitago_app\node_modules\firebase\node_modules\@firebase\auth\dist\browser-cjs\src\api\authentication\create_auth_uri.d.ts133938949605829558 0
 66C:\pollitago_app\node_modules\firebase\auth\web-extension\dist\esm133938949741224210 1
-34C:\pollitago_app\public\index.html133938884465949519 0
+34C:\pollitago_app\public\index.html133939027515869517 0
 60C:\pollitago_app\node_modules\semver\functions\prerelease.js133938949422255773 0
 34C:\pollitago_app\node_modules\yaml133938949584183212 1
 63C:\pollitago_app\node_modules\tailwindcss\lib\cli\build\deps.js133938949572080834 0
