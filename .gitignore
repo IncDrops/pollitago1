@@ -2,11 +2,11 @@
 /node_modules
 .vs/
 # Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env/
+.env.local/
+.env.development.local/
+.env.test.local/
+.env.production.local/
 
 # Build output
 /build
@@ -23,6 +23,6 @@
 # Backend specific ignores
 /backend/node_modules # If backend has its own node_modules.vs/
 
-.vercel
+.vercel/
 # Hide environment variables
-.env
+.env/
