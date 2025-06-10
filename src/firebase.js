@@ -1,30 +1,21 @@
-// src/firebase.js file (This file initializes Firebase ONCE)
+# .env file (in your project's root directory)
 
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth'; // ✅ THIS WAS MISSING
-import { getFirestore } from 'firebase/firestore';
-// Add imports for any specific Firebase services you use based on your app's needs
-// If you use Firebase Authentication, UNCOMMENT the line below:
-// import { getAuth } from 'firebase/auth'; 
-// If you use Firestore Database, UNCOMMENT the line below:
-// import { getFirestore } from 'firebase/firestore'; 
+# --- Firebase Configuration (Accessible in your frontend/browser-side code) ---
+# Parcel needs these prefixed with PARCEL_PUBLIC_ to expose them to the browser-side code
+PARCEL_PUBLIC_FIREBASE_API_KEY=AIzaSyBbygIbTA-KUOo4n8uMGEDj4LsAoD3JV-c
+PARCEL_PUBLIC_FIREBASE_AUTH_DOMAIN=pollitago-web-app.firebaseapp.com
+PARCEL_PUBLIC_FIREBASE_PROJECT_ID=pollitago-web-app
+PARCEL_PUBLIC_FIREBASE_STORAGE_BUCKET=pollitago-web-app.firebasestorage.app
+PARCEL_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=690089067831
+PARCEL_PUBLIC_FIREBASE_APP_ID=1:690089067831:web:e11838229a48a4e1ad46b2
+PARCEL_PUBLIC_FIREBASE_MEASUREMENT_ID=G-QDJ2CEFD0L
 
-// Your Firebase configuration object, reading from process.env (Parcel's way)
-const firebaseConfig = {
-  apiKey: process.env.PARCEL_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.PARCEL_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.PARCEL_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.PARCEL_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.PARCEL_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.PARCEL_PUBLIC_FIREBASE_APP_ID, // <--- CORRECTED LINE: ONLY THE VARIABLE NAME HERE
-  measurementId: process.env.PARCEL_PUBLIC_FIREBASE_MEASUREMENT_ID
-};
+# --- Stripe Publishable Key (Accessible in your frontend/browser-side code) ---
+# This key is designed to be public and is safe to include in your frontend code.
+PARCEL_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_51RWVjaGaxRthZIaCpxs1rBLSgJcaqcoIXvdmZyQGaQkT0wl4HaBlR78nQ3yu7UcK23jA4OfvbY7oifoISWwivdCd002DnxwvIQ
+PARCEL_PUBLIC_GOOGLE_API_KEY=AIzaSyAq-3R6HGRxqlR9luuSaDsxs2fA3kw6YiY
 
-// ✅ Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-// ✅ Export both auth and db so you can use them elsewhere
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-export { app as default, auth, db };
+# --- Stripe Secret Key (THIS MUST ONLY BE USED ON THE SERVER/BACKEND - NO "PARCEL_PUBLIC_" HERE!) ---
+# This key MUST NEVER be directly accessible in your frontend code.
+# It's loaded by your backend server (e.g., Node.js, Vercel Serverless Function)
+sk_test_51RWVjaGaxRthZIaC36qnF2flLsteDv7pfRsDtkk9f2olgFPuhkk5IWLD4j0sc8lIDwSnfx1XTsIVldrvrzyD1c7kco00LGyWRKV4

@@ -6,9 +6,7 @@
     "build": "parcel build public/index.html --dist-dir dist"
   },
   "dependencies": {
-    "@react-spring/web": "^10.0.1",
     "@stripe/stripe-js": "^7.3.1",
-    "@use-gesture/react": "^10.3.1",
     "@vercel/speed-insights": "^1.2.0",
     "canvas-confetti": "^1.9.3",
     "firebase": "^11.9.0",

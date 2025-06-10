@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <title>PollItAGo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
+    <title>PollItAGo</title> <!-- Your actual title will go here -->
+    <!-- The favicon link: Ensure this is correct. "./" means current directory -->
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" /> 
+</head>
+<body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+    <!-- This script tag tells Parcel where your main React application code starts -->
+    <!-- "../src/index.js" means go up one level from public/ to root, then into src/ -->
+    <script type="module" src="../src/index.js"></script> 
+</body>
 </html>

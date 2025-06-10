@@ -4,8 +4,6 @@ import { useDrag } from '@use-gesture/react';
 import './PollCard.css';
 import { getFirestore, doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-import '../../firebase';
-
 
 const db = getFirestore();
 const auth = getAuth();
