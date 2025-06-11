@@ -2,7 +2,7 @@
 
 // 1. Import necessary modules
 const express = require('express'); // Express.js for creating the web server
-const stripe = require('stripe')(process.env.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); 
+const stripe = require('stripe')(process.env.sk_test_51RWVjaGaxRthZIaC36qnF2flLsteDv7pfRsDtkk9f2oLgfPUhkk5IWLDAjQSCBlWDnSfx1X5TvlYdrvzyD1c7kco00LGyWRKV4); 
 const cors = require('cors'); // CORS to allow requests from your frontend domain
 const dotenv = require('dotenv'); // dotenv to load environment variables from .env file
 const path = require('path'); // Node.js path module for resolving file paths
