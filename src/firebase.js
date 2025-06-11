@@ -1,10 +1,18 @@
-PARCEL_PUBLIC_FIREBASE_API_KEY=AIzaSyBbygIbTA-KUOo4n8uMGEDj4LsAoD3JV-c
-PARCEL_PUBLIC_FIREBASE_AUTH_DOMAIN=pollitago-web-app.firebaseapp.com
-PARCEL_PUBLIC_FIREBASE_PROJECT_ID=pollitago-web-app
-PARCEL_PUBLIC_FIREBASE_STORAGE_BUCKET=pollitago-web-app.firebasestorage.app
-PARCEL_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=690089067831
-PARCEL_PUBLIC_FIREBASE_APP_ID=1:690089067831:web:e11838229a48a4e1ad46b2
-PARCEL_PUBLIC_FIREBASE_MEASUREMENT_ID=G-QDJ2CEFD0L
+// firebase.js
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
-PARCEL_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_51RWVjaGaxRthZIaCpxs1rBLSgJcaqcoIXvdmZyQGaQkT0wl4HaBlR78nQ3yu7UcK23jA4OfvbY7oifoISWwivdCd002DnxwvIQ
+const firebaseConfig = {
+  apiKey: "AIzaSyDi8uECsVTlrqNozWmBsOcQ_ROmHWtiNAc",
+  authDomain: "pollitago-366a0.firebaseapp.com",
+  projectId: "pollitago-366a0",
+  storageBucket: "pollitago-366a0.firebasestorage.app",
+  messagingSenderId: "35394160409",
+  appId: "1:35394160409:web:aa18564cc9f81b58796788",
+  measurementId: "G-PNKFSJPBCW"
+};
 
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+export default db;
