@@ -2,7 +2,7 @@
 
 // 1. Import necessary modules
 const express = require('express'); // Express.js for creating the web server
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Stripe SDK, uses environment variable for key
+const stripe = require('stripe')(process.env.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); 
 const cors = require('cors'); // CORS to allow requests from your frontend domain
 const dotenv = require('dotenv'); // dotenv to load environment variables from .env file
 const path = require('path'); // Node.js path module for resolving file paths
@@ -73,27 +73,3 @@ app.listen(PORT, () => {
   console.log('Ensure your STRIPE_SECRET_KEY environment variable is set!');
 });
 
-/*
-  How to use the Stripe Secret Key (sk_test_...):
-
-  RECOMMENDED (Environment Variable):
-  - In this file, the key is accessed via `process.env.STRIPE_SECRET_KEY`.
-  - You set this variable *before* running the server.
-
-  1.  Locally (in your PowerShell or Git Bash terminal on Windows):
-      Before running `node server.js`, type this command:
-      $env:STRIPE_SECRET_KEY="sk_test_YOUR_ACTUAL_STRIPE_SECRET_KEY_HERE" ; node server.js
-      (Replace "sk_test_YOUR_ACTUAL_STRIPE_SECRET_KEY_HERE" with your key)
-
-  2.  On Vercel (for deployment):
-      - Go to your Vercel project settings in the Vercel dashboard.
-      - Navigate to "Environment Variables".
-      - Add a new variable:
-          - NAME: STRIPE_SECRET_KEY
-          - VALUE: Your actual Stripe Secret Key (sk_test_... or sk_live_...)
-
-      AVOID (Hardcoding - less secure, especially for production):
-      - ONLY for quick local testing if environment variables are too complex initially.
-      - const stripe = require('stripe')('sk_test_YOUR_ACTUAL_STRIPE_SECRET_KEY_HERE');
-      - DO NOT commit hardcoded keys to GitHub or deploy them live.
-    */
