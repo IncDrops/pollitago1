@@ -2,13 +2,14 @@
 
 // 1. Import necessary modules
 const express = require('express'); // Express.js for creating the web server
-const stripe = require('stripe')(process.env.sk_test_51RWVjaGaxRthZIaC36qnF2flLsteDv7pfRsDtkk9f2oLgfPUhkk5IWLDAjQSCBlWDnSfx1X5TvlYdrvzyD1c7kco00LGyWRKV4); 
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Correctly access the secret key from environment variables
 const cors = require('cors'); // CORS to allow requests from your frontend domain
 const dotenv = require('dotenv'); // dotenv to load environment variables from .env file
 const path = require('path'); // Node.js path module for resolving file paths
 const fs = require('fs'); // Node.js file system module
 
 // 2. Load .env file from the same directory
+// Assuming your .env file is in the same directory as server.js
 const envPath = path.join(__dirname, '.env');
 if (fs.existsSync(envPath)) {
   dotenv.config({ path: envPath });
@@ -18,7 +19,6 @@ if (fs.existsSync(envPath)) {
 }
 
 console.log('🔐 Stripe Key (first 4 chars):', process.env.STRIPE_SECRET_KEY ? process.env.STRIPE_SECRET_KEY.substring(0,4) + '...' : 'Not Set');
-
 
 // 3. Initialize Express app
 const app = express();
@@ -72,4 +72,3 @@ app.listen(PORT, () => {
   console.log(`🚀 Stripe tip server running at http://localhost:${PORT}`);
   console.log('Ensure your STRIPE_SECRET_KEY environment variable is set!');
 });
-
