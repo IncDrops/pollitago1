@@ -64,7 +64,7 @@ export default function ProfilePage() {
   return (
     <AppLayout>
       <div className="container mx-auto px-4 py-8">
-        <Card className="max-w-3xl mx-auto shadow-xl overflow-hidden">
+        <Card className="w-full md:max-w-3xl mx-auto shadow-xl overflow-hidden">
           <CardHeader className="p-0">
             <div className="h-40 bg-gradient-to-r from-primary to-accent" data-ai-hint="abstract background">
               {/* Cover Image */}

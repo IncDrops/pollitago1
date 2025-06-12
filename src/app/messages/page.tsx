@@ -27,7 +27,7 @@ export default function MessagesPage() {
   return (
     <AppLayout>
       <div className="container mx-auto px-0 sm:px-4 py-8 h-full flex flex-col">
-        <Card className="max-w-2xl mx-auto shadow-xl flex-grow flex flex-col">
+        <Card className="w-full md:max-w-2xl mx-auto shadow-xl flex-grow flex flex-col">
           <CardHeader className="border-b">
             <div className="flex justify-between items-center">
               <CardTitle className="text-2xl font-bold font-headline">Messages</CardTitle>

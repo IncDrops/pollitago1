@@ -203,7 +203,7 @@ export default function PollFeed() {
   const polls = mockPolls;
 
   return (
-    <div className="space-y-6 p-4 max-w-2xl mx-auto">
+    <div className="space-y-6 p-4 w-full md:max-w-2xl md:mx-auto">
       {polls.map((poll) => (
         <PollCard key={poll.id} poll={poll} />
       ))}

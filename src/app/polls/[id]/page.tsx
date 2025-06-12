@@ -13,7 +13,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { Poll, PollOption, AffiliateLink, PollCreator } from '@/components/polls/PollCard'; // Updated import
 import { useCountdown } from '@/hooks/useCountdown';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -113,7 +113,7 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
           <ArrowLeft className="h-4 w-4 mr-1" /> Back to Feed
         </Link>
 
-        <Card className="max-w-3xl mx-auto shadow-xl">
+        <Card className="w-full md:max-w-3xl mx-auto shadow-xl">
           <CardHeader>
             <div className="flex items-start space-x-3 mb-3">
               <Link href={poll.creator.profileUrl} passHref>

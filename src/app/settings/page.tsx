@@ -11,7 +11,7 @@ export default function SettingsPage() {
   return (
     <AppLayout>
       <div className="container mx-auto px-4 py-8">
-        <Card className="max-w-2xl mx-auto shadow-xl">
+        <Card className="w-full md:max-w-2xl mx-auto shadow-xl">
           <CardHeader>
             <CardTitle className="text-3xl font-bold text-center font-headline">Settings</CardTitle>
             <CardDescription className="text-center">Manage your account and app preferences.</CardDescription>
