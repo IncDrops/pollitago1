@@ -13,24 +13,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { Poll, PollOption, AffiliateLink } from '@/components/polls/PollCard';
 import { useCountdown } from '@/hooks/useCountdown';
-import { useState } from 'react'; // Added useState
+import { useState } from 'react';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import type { StripeTipFormWrapper as StripeTipFormWrapperType } from '@/components/stripe/StripeTipForm';
+import dynamic from 'next/dynamic';
 
-// Mock poll data for detail view - In a real app, this would be fetched
-// For simplicity, let's assume we can find it in the mockPolls from PollFeed or define one here.
-// This should be dynamically fetched based on params.id
-const mockPollsList: Poll[] = [ // A simplified list for finding the poll
+const StripeTipFormWrapper = dynamic<React.ComponentProps<typeof StripeTipFormWrapperType>>(
+  () => import('@/components/stripe/StripeTipForm').then(mod => mod.StripeTipFormWrapper),
+  { ssr: false, loading: () => <p className="p-4 text-center">Loading payment form...</p> }
+);
+
+
+// Mock poll data for detail view
+const mockPollsList: Poll[] = [
   {
     id: '1',
     creator: { name: 'Alice Wonderland', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/alice' },
@@ -40,7 +42,7 @@ const mockPollsList: Poll[] = [ // A simplified list for finding the poll
       { id: '1a', text: 'Paris, France', images: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'], votes: 120 },
       { id: '1b', text: 'Italy (Amalfi Coast)', images: ['https://placehold.co/600x400.png'], votes: 250 },
     ],
-    videoUrl: 'https://example.com/paris_vs_italy.mp4', // Example video
+    videoUrl: 'https://example.com/paris_vs_italy.mp4',
     endsAt: new Date(Date.now() + 12 * 24 * 60 * 60 * 1000).toISOString(),
     totalVotes: 370,
     pledgeAmount: 50,
@@ -50,8 +52,6 @@ const mockPollsList: Poll[] = [ // A simplified list for finding the poll
         { title: "Book Paris Hotels on Expedia", url: "https://www.expedia.com/Paris-Hotels.d178293.Travel-Guide-Hotels" },
         { title: "Amalfi Coast Tour Packages", url: "https://www.viator.com/Amalfi-Coast-tours/d946-ttd" }
     ],
-    // comments: any[], // Assuming comments are handled separately or fetched
-    // creatorDecision?: 'accepted' | 'rejected' // Assuming this is determined dynamically
   },
    {
     id: '5',
@@ -79,18 +79,17 @@ const getVotePercentage = (votes: number, totalVotes: number) => {
   return Math.round((votes / totalVotes) * 100);
 };
 
-// Mock comments, in a real app these would be fetched
 const mockComments = [
     { id: 'c1', user: { name: 'Bob The Builder', avatarUrl: 'https://placehold.co/40x40.png' }, text: 'Italy for sure! The romance is unmatched.', timestamp: '2d ago' },
     { id: 'c2', user: { name: 'Charlie Brown', avatarUrl: 'https://placehold.co/40x40.png' }, text: 'Paris is classic, but Amalfi Coast offers unique beauty.', timestamp: '1d ago' },
 ];
 
 export default function PollDetailPage({ params }: { params: { id: string } }) {
-  const poll = mockPollsList.find(p => p.id === params.id) || mockPollsList[0]; // Fallback to first poll if not found
+  const poll = mockPollsList.find(p => p.id === params.id) || mockPollsList[0];
   const winningOption = poll.options.reduce((prev, current) => (prev.votes > current.votes) ? prev : current);
   const timeLeft = useCountdown(poll.endsAt);
-  const [tipAmount, setTipAmount] = useState('5.00'); // Added state for tip amount
-  // Mocking creator decision for demonstration
+  const [initialTipAmount] = useState('5.00');
+  const [isTipDialogOpen, setIsTipDialogOpen] = useState(false);
   const creatorDecision: 'accepted' | 'rejected' | undefined = timeLeft === 'Ended' ? (Math.random() > 0.5 ? 'accepted' : 'rejected') : undefined;
 
 
@@ -140,10 +139,8 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
 
             {poll.videoUrl && (
               <div className="rounded-lg overflow-hidden aspect-video bg-muted flex items-center justify-center text-muted-foreground border">
-                {/* Replace with actual video player in a real app */}
                 <Video className="w-16 h-16 text-primary" />
                 <span className="ml-3 text-lg">Watch video context</span>
-                 {/* For a real app: <video src={poll.videoUrl} controls className="w-full h-full"></video> */}
               </div>
             )}
 
@@ -231,13 +228,13 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
               <Button variant="secondary">
                 <ThumbsUp className="h-4 w-4 mr-2" /> Like Poll
               </Button>
-              <Dialog>
+              <Dialog open={isTipDialogOpen} onOpenChange={setIsTipDialogOpen}>
                 <DialogTrigger asChild>
                   <Button variant="outline" className="bg-accent hover:bg-accent/90 text-accent-foreground">
                       <Gift className="h-4 w-4 mr-2" /> Tip {poll.creator.name} {poll.tipCount && poll.tipCount > 0 ? `(${poll.tipCount})` : ''}
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="sm:max-w-md">
                   <DialogHeader>
                     <DialogTitle>Tip {poll.creator.name}</DialogTitle>
                     <DialogDescription>
@@ -245,32 +242,16 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
                       PollItAGo takes a small platform fee.
                     </DialogDescription>
                   </DialogHeader>
-                  <div className="grid gap-4 py-4">
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor={`tipAmount-detail-${poll.id}`} className="text-right">
-                        Amount
-                      </Label>
-                      <Input
-                        id={`tipAmount-detail-${poll.id}`}
-                        type="number"
-                        value={tipAmount}
-                        onChange={(e) => setTipAmount(e.target.value)}
-                        placeholder="5.00"
-                        step="0.01"
-                        min="1.00"
-                        className="col-span-3"
-                      />
-                    </div>
-                    <div className="p-4 border rounded-md bg-muted text-sm text-muted-foreground min-h-[100px] flex items-center justify-center">
-                      Stripe payment form will be embedded here.
-                    </div>
-                  </div>
-                  <DialogFooter>
-                    <DialogClose asChild>
-                      <Button type="button" variant="outline">Cancel</Button>
-                    </DialogClose>
-                    <Button type="button" onClick={() => console.log(`Attempting to tip ${poll.creator.name} $${tipAmount} for poll ${poll.id} from detail page. Stripe processing to be implemented.`)}>Confirm Tip</Button>
-                  </DialogFooter>
+                   <StripeTipFormWrapper
+                    initialTipAmount={initialTipAmount}
+                    creatorName={poll.creator.name}
+                    pollId={poll.id}
+                    onCancel={() => setIsTipDialogOpen(false)}
+                    onSuccessfulTip={() => {
+                      setIsTipDialogOpen(false);
+                      // TODO: Optionally update tipCount locally or refetch poll data
+                    }}
+                  />
                 </DialogContent>
               </Dialog>
             </div>

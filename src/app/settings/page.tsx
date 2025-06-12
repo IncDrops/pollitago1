@@ -1,10 +1,11 @@
+
 import AppLayout from '@/components/layout/AppLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { User, Bell, Palette, Shield, LogOut } from 'lucide-react';
+import { User, Bell, Palette, Shield, LogOut, CreditCard } from 'lucide-react';
 
 export default function SettingsPage() {
   return (
@@ -22,7 +23,12 @@ export default function SettingsPage() {
               <div className="space-y-4">
                 <Button variant="outline" className="w-full justify-start">Edit Profile</Button>
                 <Button variant="outline" className="w-full justify-start">Change Password</Button>
-                <Button variant="outline" className="w-full justify-start">Manage Payment Methods (Stripe)</Button>
+                <div className="space-y-1">
+                  <Button variant="outline" className="w-full justify-start">
+                    <CreditCard className="mr-2 h-4 w-4" /> Manage Payment Methods
+                  </Button>
+                  <p className="text-xs text-muted-foreground px-1">Manage your saved cards and tipping preferences via Stripe (feature coming soon).</p>
+                </div>
               </div>
             </div>
             <Separator />

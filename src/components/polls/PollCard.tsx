@@ -13,19 +13,24 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import type { StripeTipFormWrapper as StripeTipFormWrapperType } from '@/components/stripe/StripeTipForm'; // Import type for dynamic import
+import dynamic from 'next/dynamic';
+
+
+const StripeTipFormWrapper = dynamic<React.ComponentProps<typeof StripeTipFormWrapperType>>(
+  () => import('@/components/stripe/StripeTipForm').then(mod => mod.StripeTipFormWrapper),
+  { ssr: false, loading: () => <p className="p-4 text-center">Loading payment form...</p> }
+);
+
 
 export interface PollOption {
   id: string;
   text: string;
-  images?: string[]; // URLs of up to 2 images
+  images?: string[];
   votes: number;
 }
 
@@ -44,13 +49,13 @@ export interface Poll {
   question: string;
   description?: string;
   options: PollOption[];
-  videoUrl?: string; // URL for up to 60s video
-  endsAt: string; // ISO string
+  videoUrl?: string;
+  endsAt: string;
   pledgeAmount?: number;
   totalVotes: number;
   tipCount?: number;
   affiliateLinks?: AffiliateLink[];
-  isSensitive?: boolean; // Flag for NSFW/spicy content
+  isSensitive?: boolean;
 }
 
 interface PollCardProps {
@@ -60,7 +65,8 @@ interface PollCardProps {
 export default function PollCard({ poll }: PollCardProps) {
   const isTwoOptionPoll = poll.options.length === 2;
   const timeLeft = useCountdown(poll.endsAt);
-  const [tipAmount, setTipAmount] = useState('5.00');
+  const [initialTipAmount] = useState('5.00'); // Default tip amount
+  const [isTipDialogOpen, setIsTipDialogOpen] = useState(false);
 
   const truncatedDescription = poll.description && poll.description.length > 140
     ? poll.description.substring(0, 140) + "..."
@@ -159,13 +165,13 @@ export default function PollCard({ poll }: PollCardProps) {
           )}
         </div>
         <div className="flex items-center space-x-2">
-          <Dialog>
+          <Dialog open={isTipDialogOpen} onOpenChange={setIsTipDialogOpen}>
             <DialogTrigger asChild>
               <Button variant="outline" className="bg-accent hover:bg-accent/90 text-accent-foreground">
                   <Gift className="h-4 w-4 mr-2" /> Tip {poll.creator.name} {poll.tipCount && poll.tipCount > 0 ? `(${poll.tipCount})` : ''}
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-md">
               <DialogHeader>
                 <DialogTitle>Tip {poll.creator.name}</DialogTitle>
                 <DialogDescription>
@@ -173,32 +179,16 @@ export default function PollCard({ poll }: PollCardProps) {
                   PollItAGo takes a small platform fee.
                 </DialogDescription>
               </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor={`tipAmount-${poll.id}`} className="text-right">
-                    Amount
-                  </Label>
-                  <Input
-                    id={`tipAmount-${poll.id}`}
-                    type="number"
-                    value={tipAmount}
-                    onChange={(e) => setTipAmount(e.target.value)}
-                    placeholder="5.00"
-                    step="0.01"
-                    min="1.00"
-                    className="col-span-3"
-                  />
-                </div>
-                <div className="p-4 border rounded-md bg-muted text-sm text-muted-foreground min-h-[100px] flex items-center justify-center">
-                  Stripe payment form will be embedded here.
-                </div>
-              </div>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button type="button" variant="outline">Cancel</Button>
-                </DialogClose>
-                <Button type="button" onClick={() => console.log(`Attempting to tip ${poll.creator.name} $${tipAmount} for poll ${poll.id}. Stripe processing to be implemented.`)}>Confirm Tip</Button>
-              </DialogFooter>
+              <StripeTipFormWrapper
+                initialTipAmount={initialTipAmount}
+                creatorName={poll.creator.name}
+                pollId={poll.id}
+                onCancel={() => setIsTipDialogOpen(false)}
+                onSuccessfulTip={() => {
+                  setIsTipDialogOpen(false);
+                  // TODO: Optionally update tipCount locally or refetch poll data
+                }}
+              />
             </DialogContent>
           </Dialog>
           <Link href={`/polls/${poll.id}`} passHref>
