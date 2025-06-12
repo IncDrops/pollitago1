@@ -1,11 +1,13 @@
 
+"use client";
+
 import AppLayout from '@/components/layout/AppLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { PlusCircle, ImagePlus, Video, CalendarDays, DollarSign, Info } from 'lucide-react';
+import { PlusCircle, ImagePlus, Video, CalendarDays, DollarSign, Info, Flame } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 
