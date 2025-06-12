@@ -11,7 +11,7 @@ import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, ThumbsUp, MessageSquare, ExternalLink, Video, CheckCircle, XCircle, Users, Flame, Gift, Link as LinkIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import type { Poll, PollOption, AffiliateLink } from '@/components/polls/PollCard';
+import type { Poll, PollOption, AffiliateLink, PollCreator } from '@/components/polls/PollCard'; // Updated import
 import { useCountdown } from '@/hooks/useCountdown';
 import { useState } from 'react';
 import {
@@ -22,20 +22,24 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import type { StripeTipFormWrapper as StripeTipFormWrapperType } from '@/components/stripe/StripeTipForm';
+import type { StripeTipFormWrapperProps } from '@/components/stripe/StripeTipForm';
 import dynamic from 'next/dynamic';
 
-const StripeTipFormWrapper = dynamic<React.ComponentProps<typeof StripeTipFormWrapperType>>(
+const StripeTipFormWrapper = dynamic<StripeTipFormWrapperProps>(
   () => import('@/components/stripe/StripeTipForm').then(mod => mod.StripeTipFormWrapper),
   { ssr: false, loading: () => <p className="p-4 text-center">Loading payment form...</p> }
 );
 
+const mockCreators: Record<string, PollCreator> = {
+  alice: { id: 'userAlice123', name: 'Alice Wonderland', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/alice' },
+  eve: { id: 'userEve112', name: 'Eve F.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/eve' },
+};
 
 // Mock poll data for detail view
 const mockPollsList: Poll[] = [
   {
     id: '1',
-    creator: { name: 'Alice Wonderland', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/alice' },
+    creator: mockCreators.alice,
     question: 'Engagement location in 14 days: Paris or Italy?',
     description: "He's planning to propose soon and we're torn between these two iconic romantic destinations! Paris offers city charm and landmarks, while the Amalfi Coast has stunning views and a relaxed vibe. Help us decide for our trip 12 days from now! We're also looking for hotel recommendations and tour packages, check out the links if you have suggestions!",
     options: [
@@ -55,7 +59,7 @@ const mockPollsList: Poll[] = [
   },
    {
     id: '5',
-    creator: { name: 'Eve F.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/eve' },
+    creator: mockCreators.eve,
     question: 'Losing my virginity, condom or no condom?',
     description: "This is a big step for me and I want to make an informed decision. Safety vs. sensation, what are your thoughts? Poll ends in 7 days. I've linked some resources I found helpful below.",
     options: [
@@ -85,12 +89,21 @@ const mockComments = [
 ];
 
 export default function PollDetailPage({ params }: { params: { id: string } }) {
-  const poll = mockPollsList.find(p => p.id === params.id) || mockPollsList[0];
+  const poll = mockPollsList.find(p => p.id === params.id) || mockPollsList[0]; // Fallback to first poll if not found
   const winningOption = poll.options.reduce((prev, current) => (prev.votes > current.votes) ? prev : current);
   const timeLeft = useCountdown(poll.endsAt);
   const [initialTipAmount] = useState('5.00');
   const [isTipDialogOpen, setIsTipDialogOpen] = useState(false);
-  const creatorDecision: 'accepted' | 'rejected' | undefined = timeLeft === 'Ended' ? (Math.random() > 0.5 ? 'accepted' : 'rejected') : undefined;
+  
+  // Simulate creator's decision after poll ends
+  const [creatorDecision, setCreatorDecision] = useState<'accepted' | 'rejected' | undefined>(undefined);
+
+  useEffect(() => {
+    if (timeLeft === 'Ended' && !creatorDecision) {
+      // Only set decision once after poll ends
+      setCreatorDecision(Math.random() > 0.5 ? 'accepted' : 'rejected');
+    }
+  }, [timeLeft, creatorDecision]);
 
 
   return (
@@ -139,6 +152,7 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
 
             {poll.videoUrl && (
               <div className="rounded-lg overflow-hidden aspect-video bg-muted flex items-center justify-center text-muted-foreground border">
+                {/* In a real app, this would be a video player component */}
                 <Video className="w-16 h-16 text-primary" />
                 <span className="ml-3 text-lg">Watch video context</span>
               </div>
@@ -239,12 +253,13 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
                     <DialogTitle>Tip {poll.creator.name}</DialogTitle>
                     <DialogDescription>
                       Show your appreciation! Your tip (minimum $1.00) will go directly to {poll.creator.name}.
-                      PollItAGo takes a small platform fee.
+                      PollItAGo takes a small platform fee. PollitPoints will be awarded.
                     </DialogDescription>
                   </DialogHeader>
                    <StripeTipFormWrapper
                     initialTipAmount={initialTipAmount}
                     creatorName={poll.creator.name}
+                    recipientId={poll.creator.id} // Pass creator's ID
                     pollId={poll.id}
                     onCancel={() => setIsTipDialogOpen(false)}
                     onSuccessfulTip={() => {

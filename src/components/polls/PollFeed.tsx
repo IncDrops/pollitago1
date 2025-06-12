@@ -1,16 +1,31 @@
 
-import PollCard, { type Poll } from './PollCard';
+import PollCard, { type Poll, type PollCreator } from './PollCard';
 
 // Helper to calculate future dates
 const daysFromNow = (days: number) => new Date(Date.now() + days * 24 * 60 * 60 * 1000).toISOString();
 const hoursFromNow = (hours: number) => new Date(Date.now() + hours * 60 * 60 * 1000).toISOString();
 const minutesFromNow = (minutes: number) => new Date(Date.now() + minutes * 60 * 1000).toISOString();
 
+const creators: Record<string, PollCreator> = {
+  alice: { id: 'userAlice123', name: 'Alice Wonderland', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/alice' },
+  bob: { id: 'userBob456', name: 'Bob The Builder', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/bob' },
+  charlie: { id: 'userCharlie789', name: 'Charlie Brown', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/charlie' },
+  diana: { id: 'userDiana101', name: 'Diana Prince', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/diana' },
+  eve: { id: 'userEve112', name: 'Eve F.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/eve' },
+  frank: { id: 'userFrank131', name: 'Frank G.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/frank' },
+  grace: { id: 'userGrace415', name: 'Grace H.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/grace' },
+  hannah: { id: 'userHannah161', name: 'Hannah I.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/hannah' },
+  ian: { id: 'userIan718', name: 'Ian J.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/ian' },
+  julia: { id: 'userJulia192', name: 'Julia K.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/julia' },
+  kevin: { id: 'userKevin021', name: 'Kevin L.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/kevin' },
+};
+
+
 // Mock data for polls
 const mockPolls: Poll[] = [
   {
     id: '1',
-    creator: { name: 'Alice Wonderland', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/alice' },
+    creator: creators.alice,
     question: 'Engagement location in two weeks: Paris or Italy?',
     description: "He's planning to propose soon and we're torn between these two iconic romantic destinations! Paris offers city charm and landmarks, while the Amalfi Coast has stunning views and a relaxed vibe. Help us decide for our trip 12 days from now!",
     options: [
@@ -28,7 +43,7 @@ const mockPolls: Poll[] = [
   },
   {
     id: '5', 
-    creator: { name: 'Eve F.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/eve' },
+    creator: creators.eve,
     question: 'Losing my virginity, condom or no condom?',
     description: "This is a big step for me and I want to make an informed decision. Safety vs. sensation, what are your thoughts? Poll ends in 7 days.",
     options: [
@@ -46,7 +61,7 @@ const mockPolls: Poll[] = [
   },
   {
     id: '2',
-    creator: { name: 'Bob The Builder', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/bob' },
+    creator: creators.bob,
     question: 'Which house to buy? Option A or Option B?',
     description: "We've narrowed it down to two potential homes. Option A is a sleek modern condo downtown, and Option B is a spacious suburban house with a big yard. Both have pros and cons. Check out the video walkthrough! Poll ends in 30 days.",
     options: [
@@ -64,7 +79,7 @@ const mockPolls: Poll[] = [
   },
   {
     id: '3',
-    creator: { name: 'Charlie Brown', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/charlie' },
+    creator: creators.charlie,
     question: 'What to eat for lunch? Tuna sandwich or grilled chicken wrap?',
     description: "Quick decision needed! Got a craving but can't decide. Poll ends in literally 1 minute!",
     options: [ 
@@ -77,7 +92,7 @@ const mockPolls: Poll[] = [
   },
    {
     id: '4',
-    creator: { name: 'Diana Prince', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/diana' },
+    creator: creators.diana,
     question: 'Dress for the New Orleans Jazz Festival?',
     description: "Heading to NOLA for Jazz Fest in 2 weeks! Which of these two outfits screams 'jazzy and fun' more? Need your fashion expertise!",
     options: [
@@ -90,7 +105,7 @@ const mockPolls: Poll[] = [
   },
   {
     id: '6',
-    creator: { name: 'Frank G.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/frank' },
+    creator: creators.frank,
     question: 'Should I quit my job? Yes or No?',
     description: "Been feeling unfulfilled at my current job for a while now. Thinking of taking the plunge and looking for something new, but it's a big risk. Poll ends in 12 days.",
     options: [
@@ -104,7 +119,7 @@ const mockPolls: Poll[] = [
   },
   {
     id: '7',
-    creator: { name: 'Grace H.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/grace' },
+    creator: creators.grace,
     question: 'Which career path should I pursue? Tech or Art?',
     description: "At a crossroads in my life. One path offers stability and innovation, the other passion and creativity. Which direction should I head? This poll will run for 21 days.",
     options: [
@@ -117,7 +132,7 @@ const mockPolls: Poll[] = [
   },
   {
     id: '8',
-    creator: { name: 'Hannah I.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/hannah' },
+    creator: creators.hannah,
     question: 'Should I break up with my boyfriend? Yes or No?',
     description: "Things haven't been great lately and I'm wondering if it's time to move on. This is a tough one. Need your input over the next 4 days.",
     options: [
@@ -130,7 +145,7 @@ const mockPolls: Poll[] = [
   },
   {
     id: '9',
-    creator: { name: 'Hannah I.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/hannah' }, 
+    creator: creators.hannah, 
     question: 'Should we get back together?! Quick poll!',
     description: "Okay, so the breakup happened... but now I'm having second thoughts. Impulsive, I know! What do you all think? Only 30 minutes to vote on this rollercoaster!",
     options: [
@@ -143,7 +158,7 @@ const mockPolls: Poll[] = [
   },
   {
     id: '10',
-    creator: { name: 'Ian J.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/ian' },
+    creator: creators.ian,
     question: "Should I try to reunite with a relative I haven't gotten along with in years?",
     description: "There's been a long-standing rift with a family member. Part of me wants to mend fences, but another part is hesitant. What's the collective wisdom? Poll open for 10 days.",
     options: [
@@ -155,7 +170,7 @@ const mockPolls: Poll[] = [
   },
   {
     id: '11',
-    creator: { name: 'Julia K.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/julia' },
+    creator: creators.julia,
     question: 'My husband cheated, should I stay and try to work it out with therapy or take this as a sign to run?',
     description: "Devastated right now. Found out about the affair and I'm completely lost. Is this something that can be fixed with professional help, or is it a dealbreaker? Need advice ASAP, poll ends in 8 hours.",
     options: [
@@ -170,7 +185,7 @@ const mockPolls: Poll[] = [
   },
   {
     id: '12',
-    creator: { name: 'Kevin L.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/kevin' },
+    creator: creators.kevin,
     question: 'These jeans feel tight... Workout more or buy new jeans?', 
     description: "My favorite jeans are feeling a bit snug. Time to hit the gym more, or just embrace comfort and size up? You have 3 days to help me decide.",
     options: [
@@ -195,4 +210,3 @@ export default function PollFeed() {
     </div>
   );
 }
-

@@ -17,11 +17,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import type { StripeTipFormWrapper as StripeTipFormWrapperType } from '@/components/stripe/StripeTipForm'; // Import type for dynamic import
+import type { StripeTipFormWrapperProps } from '@/components/stripe/StripeTipForm'; // Import type for dynamic import
 import dynamic from 'next/dynamic';
 
 
-const StripeTipFormWrapper = dynamic<React.ComponentProps<typeof StripeTipFormWrapperType>>(
+const StripeTipFormWrapper = dynamic<StripeTipFormWrapperProps>(
   () => import('@/components/stripe/StripeTipForm').then(mod => mod.StripeTipFormWrapper),
   { ssr: false, loading: () => <p className="p-4 text-center">Loading payment form...</p> }
 );
@@ -39,13 +39,16 @@ export interface AffiliateLink {
   url: string;
 }
 
-export interface Poll {
-  id: string;
-  creator: {
+export interface PollCreator {
+    id: string; // Add creator ID
     name: string;
     avatarUrl?: string;
     profileUrl: string;
-  };
+}
+
+export interface Poll {
+  id: string;
+  creator: PollCreator;
   question: string;
   description?: string;
   options: PollOption[];
@@ -176,17 +179,21 @@ export default function PollCard({ poll }: PollCardProps) {
                 <DialogTitle>Tip {poll.creator.name}</DialogTitle>
                 <DialogDescription>
                   Show your appreciation! Your tip (minimum $1.00) will go directly to {poll.creator.name}.
-                  PollItAGo takes a small platform fee.
+                  PollItAGo takes a small platform fee. PollitPoints will be awarded.
                 </DialogDescription>
               </DialogHeader>
               <StripeTipFormWrapper
                 initialTipAmount={initialTipAmount}
                 creatorName={poll.creator.name}
+                recipientId={poll.creator.id} // Pass creator's ID as recipientId
                 pollId={poll.id}
                 onCancel={() => setIsTipDialogOpen(false)}
                 onSuccessfulTip={() => {
                   setIsTipDialogOpen(false);
-                  // TODO: Optionally update tipCount locally or refetch poll data
+                  // In a real app, you might want to refetch poll data to update tipCount
+                  // or optimistically update it on the client.
+                  // For now, we'll just close the dialog.
+                  // poll.tipCount = (poll.tipCount || 0) + 1; // Example optimistic update (would need state management)
                 }}
               />
             </DialogContent>

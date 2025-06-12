@@ -19,17 +19,21 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '' // Fallback to empty string if not set
 );
 
-interface StripeTipFormProps {
+export interface StripeTipFormWrapperProps {
   initialTipAmount: string;
   creatorName: string;
+  // recipientId would typically be the creator's user ID or their Stripe Connect account ID
+  // For this placeholder, we'll use it to simulate sending to a backend.
+  recipientId: string; 
   pollId: string;
   onCancel: () => void;
   onSuccessfulTip: () => void;
 }
 
-const CheckoutForm: React.FC<StripeTipFormProps> = ({
+const CheckoutForm: React.FC<StripeTipFormWrapperProps> = ({
   initialTipAmount,
   creatorName,
+  recipientId,
   pollId,
   onCancel,
   onSuccessfulTip,
@@ -61,7 +65,20 @@ const CheckoutForm: React.FC<StripeTipFormProps> = ({
       return;
     }
 
+    const numericTipAmount = parseFloat(tipAmount);
+    if (isNaN(numericTipAmount) || numericTipAmount < 1.00) {
+        setError('Minimum tip amount is $1.00.');
+        toast({ title: 'Invalid Amount', description: 'Minimum tip amount is $1.00.', variant: 'destructive' });
+        setIsProcessing(false);
+        return;
+    }
+    const amountInSmallestUnit = Math.round(numericTipAmount * 100);
+
+
     try {
+      // 1. Create a PaymentMethod (optional, can be done during payment confirmation)
+      //    This step isn't strictly necessary if you're confirming immediately,
+      //    but it's good for understanding the flow.
       const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
         card: cardElement,
@@ -69,29 +86,71 @@ const CheckoutForm: React.FC<StripeTipFormProps> = ({
       });
 
       if (paymentMethodError) {
-        throw paymentMethodError;
+        throw paymentMethodError; // This will be caught by the catch block
       }
 
-      console.log('Stripe PaymentMethod ID:', paymentMethod.id);
-      console.log(`Simulating tip of $${tipAmount} to ${creatorName} for poll ${pollId}. Backend processing required.`);
-      
-      // In a real app, you would now send paymentMethod.id and tipAmount
-      // to your backend to create a PaymentIntent and confirm the payment.
-
-      toast({
-        title: 'Tip Successful! (Simulated)',
-        description: `You've tipped ${creatorName} $${tipAmount}. Thank you!`,
+      // 2. Call your backend to create a PaymentIntent and get its client_secret
+      const response = await fetch('/api/tip', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount: amountInSmallestUnit, // Send amount in cents
+          recipientId: recipientId, 
+          pollId: pollId,
+          // paymentMethodId: paymentMethod.id // You could send this if your backend uses it
+        }),
       });
-      setIsProcessing(false);
-      onSuccessfulTip();
-    } catch (e) {
-      const stripeError = e as StripeError;
-      setError(stripeError.message || 'An unexpected error occurred during payment.');
+
+      const paymentIntentData = await response.json();
+
+      if (!response.ok || paymentIntentData.error) {
+        throw new Error(paymentIntentData.error || 'Failed to initialize payment.');
+      }
+
+      if (!paymentIntentData.clientSecret) {
+        throw new Error('Client secret not received from server.');
+      }
+      
+      // 3. Confirm the card payment with the client_secret from your backend
+      const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(
+        paymentIntentData.clientSecret, 
+        {
+          payment_method: {
+            card: cardElement,
+            billing_details: {
+              name: `Tipper for ${creatorName} (Poll ID: ${pollId})`,
+            },
+          },
+        }
+      );
+
+      if (confirmError) {
+        throw confirmError; // This will be caught by the catch block
+      }
+      
+      // PaymentIntent successful! (or requires action)
+      if (paymentIntent?.status === 'succeeded') {
+        toast({ title: 'Tip Successful!', description: `You've tipped ${creatorName} $${numericTipAmount.toFixed(2)}. Thank you!` });
+        onSuccessfulTip();
+      } else if (paymentIntent?.status === 'requires_action' || paymentIntent?.status === 'requires_confirmation') {
+         setError('Further action is needed to complete this payment. Please follow the prompts.');
+         toast({ title: 'Payment Incomplete', description: 'Further action or confirmation is required.', variant: 'destructive'});
+      } else {
+        setError(`Payment status: ${paymentIntent?.status || 'unknown'}. Please try again.`);
+        toast({ title: 'Payment Unsuccessful', description: `Payment status: ${paymentIntent?.status || 'unknown'}.`, variant: 'destructive'});
+      }
+
+    } catch (e: any) { // Catches StripeError or other errors
+      const errorMessage = e.message || 'An unexpected error occurred during payment.';
+      setError(errorMessage);
       toast({
         title: 'Payment Error',
-        description: stripeError.message || 'Could not process payment. Please check your card details.',
+        description: errorMessage,
         variant: 'destructive',
       });
+    } finally {
       setIsProcessing(false);
     }
   };
@@ -100,7 +159,7 @@ const CheckoutForm: React.FC<StripeTipFormProps> = ({
     style: {
       base: {
         fontSize: '16px',
-        color: 'hsl(var(--foreground))', // Adapts to theme
+        color: 'hsl(var(--foreground))', 
         '::placeholder': { color: 'hsl(var(--muted-foreground))' },
         fontFamily: 'Inter, sans-serif', 
       },
@@ -124,7 +183,7 @@ const CheckoutForm: React.FC<StripeTipFormProps> = ({
           onChange={(e) => setTipAmount(e.target.value)}
           placeholder="5.00"
           step="0.01"
-          min="1.00" // Stripe typically has minimum transaction amounts (e.g., $0.50 or $1.00)
+          min="1.00" 
           className="col-span-3"
           disabled={isProcessing}
           required
@@ -146,7 +205,7 @@ const CheckoutForm: React.FC<StripeTipFormProps> = ({
   );
 };
 
-export const StripeTipFormWrapper: React.FC<StripeTipFormProps> = (props) => {
+export const StripeTipFormWrapper: React.FC<StripeTipFormWrapperProps> = (props) => {
   if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
     console.error("Stripe publishable key is not set. Please set NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY in your .env.local file.");
     return (
@@ -163,7 +222,7 @@ export const StripeTipFormWrapper: React.FC<StripeTipFormProps> = (props) => {
   }
   return (
     <Elements stripe={stripePromise}>
-      <CheckoutForm {...props} />
+      <CheckoutForm {...props} recipientId={props.poll.creator.id} />
     </Elements>
   );
 };

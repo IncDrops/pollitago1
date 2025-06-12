@@ -5,13 +5,19 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Edit3, Users, BarChart3 } from 'lucide-react';
-import PollCard, { type Poll } from '@/components/polls/PollCard'; // Re-use PollCard for displaying user's polls
+import PollCard, { type Poll, type PollCreator } from '@/components/polls/PollCard'; // Re-use PollCard for displaying user's polls
 
 // Mock user data
-const userProfile = {
+const userProfileCreator: PollCreator = {
+  id: 'userAlice123',
   name: 'Alice Wonderland',
-  username: '@alicew',
   avatarUrl: 'https://placehold.co/150x150.png',
+  profileUrl: '/profile/alice' // Assuming this is the correct profile URL structure
+};
+
+const userProfile = {
+  ...userProfileCreator, // Spread common fields
+  username: '@alicew',
   bio: 'Curiouser and curiouser! Exploring decisions one poll at a time. Join my adventures!',
   followers: 1250,
   following: 300,
@@ -22,7 +28,7 @@ const userProfile = {
 const userPolls: Poll[] = [
    {
     id: '1',
-    creator: { name: userProfile.name, avatarUrl: userProfile.avatarUrl, profileUrl: '/profile/alice' },
+    creator: userProfileCreator,
     question: 'Engagement location in 14 days: Paris or Italy?',
     options: [
       { id: '1a', text: 'Paris, France', images: ['https://placehold.co/300x200.png'], votes: 120 },
@@ -40,7 +46,7 @@ const userPolls: Poll[] = [
   },
   {
     id: 'user-poll-2',
-    creator: { name: userProfile.name, avatarUrl: userProfile.avatarUrl, profileUrl: '/profile/alice' },
+    creator: userProfileCreator,
     question: 'Next travel destination: Japan or Australia?',
     options: [
       { id: 'up2a', text: 'Japan (Tokyo & Kyoto)', votes: 95 },
@@ -92,6 +98,16 @@ export default function ProfilePage() {
               </div>
             </div>
 
+            {/* Affiliate Placements */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              <div className="border p-4 rounded-md text-center bg-secondary/20">
+                Affiliate Placement 1
+              </div>
+              <div className="border p-4 rounded-md text-center bg-secondary/20">
+                Affiliate Placement 2
+              </div>
+            </div>
+
             <Tabs defaultValue="my-polls" className="w-full">
               <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3">
                 <TabsTrigger value="my-polls">My Polls</TabsTrigger>
@@ -117,4 +133,3 @@ export default function ProfilePage() {
     </AppLayout>
   );
 }
-
