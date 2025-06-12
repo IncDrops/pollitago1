@@ -1,3 +1,4 @@
+
 import AppLayout from '@/components/layout/AppLayout';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -30,6 +31,12 @@ const userPolls: Poll[] = [
     endsAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
     totalVotes: 370,
     pledgeAmount: 50,
+    tipCount: 12,
+    description: "He's planning to propose soon and we're torn between these two iconic romantic destinations! Paris offers city charm and landmarks, while the Amalfi Coast has stunning views and a relaxed vibe. Help us decide for our trip 12 days from now!",
+    affiliateLinks: [
+        { title: "Book Paris Hotels on Expedia", url: "#" },
+        { title: "Amalfi Coast Tours", url: "#" }
+    ]
   },
   {
     id: 'user-poll-2',
@@ -41,6 +48,8 @@ const userPolls: Poll[] = [
     ],
     endsAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
     totalVotes: 175,
+    description: "Can't decide on my next big adventure. Both seem amazing!",
+    tipCount: 3,
   },
 ];
 
@@ -56,7 +65,7 @@ export default function ProfilePage() {
             </div>
             <div className="p-6 flex flex-col sm:flex-row items-center sm:items-end -mt-16 sm:-mt-12 space-y-4 sm:space-y-0 sm:space-x-4">
               <Avatar className="h-32 w-32 border-4 border-card ring-2 ring-primary">
-                <AvatarImage src={userProfile.avatarUrl} alt={userProfile.name} data-ai-hint="profile person"/>
+                <AvatarImage src={userProfile.avatarUrl} alt={userProfile.name} data-ai-hint="anime character"/>
                 <AvatarFallback className="text-4xl">{userProfile.name.substring(0, 2).toUpperCase()}</AvatarFallback>
               </Avatar>
               <div className="flex-grow text-center sm:text-left">
@@ -108,3 +117,4 @@ export default function ProfilePage() {
     </AppLayout>
   );
 }
+

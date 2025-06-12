@@ -39,6 +39,10 @@ const mockPolls: Poll[] = [
     totalVotes: 275,
     isSensitive: true,
     tipCount: 5,
+    affiliateLinks: [
+        { title: "Sexual Health Info - Planned Parenthood", url: "https://www.plannedparenthood.org/learn/sexual-health" },
+        { title: "Condom Variety Packs on Amazon", url: "https://www.amazon.com/s?k=condom+variety+pack" }
+    ]
   },
   {
     id: '2',
@@ -191,3 +195,4 @@ export default function PollFeed() {
     </div>
   );
 }
+

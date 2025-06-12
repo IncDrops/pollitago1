@@ -1,3 +1,4 @@
+
 import AdminLayout from '../layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -16,7 +17,7 @@ import {
 const mockModerators = [
   { id: 'mod1', name: 'Jane Admin', email: 'jane@pollitago.com', role: 'Super Moderator', status: 'Active', lastLogin: '2024-07-28 10:00 AM', avatarUrl: 'https://placehold.co/40x40.png' },
   { id: 'mod2', name: 'John Steward', email: 'john@pollitago.com', role: 'Moderator', status: 'Active', lastLogin: '2024-07-28 09:30 AM', avatarUrl: 'https://placehold.co/40x40.png' },
-  { id: 'mod3', name: 'Alice Keeper', email: 'alice@pollitago.com', role: 'Content Reviewer', status: 'Inactive', lastLogin: '2024-07-25 15:00 PM' },
+  { id: 'mod3', name: 'Alice Keeper', email: 'alice@pollitago.com', role: 'Content Reviewer', status: 'Inactive', lastLogin: '2024-07-25 15:00 PM', avatarUrl: 'https://placehold.co/40x40.png' },
 ];
 
 export default function AdminModeratorsPage() {
@@ -58,7 +59,7 @@ export default function AdminModeratorsPage() {
                     <TableCell>
                       <div className="flex items-center space-x-3">
                         <Avatar>
-                           <AvatarImage src={mod.avatarUrl} alt={mod.name} data-ai-hint="profile person"/>
+                           <AvatarImage src={mod.avatarUrl} alt={mod.name} data-ai-hint="anime character"/>
                            <AvatarFallback>{mod.name.substring(0,2).toUpperCase()}</AvatarFallback>
                         </Avatar>
                         <div>
@@ -103,3 +104,4 @@ export default function AdminModeratorsPage() {
     </AdminLayout>
   );
 }
+

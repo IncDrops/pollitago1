@@ -1,3 +1,4 @@
+
 import AppLayout from '@/components/layout/AppLayout';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -17,7 +18,7 @@ interface Conversation {
 
 const mockConversations: Conversation[] = [
   { id: 'convo1', name: 'Bob The Builder', avatarUrl: 'https://placehold.co/50x50.png', lastMessage: "Thanks for the advice on the house poll!", timestamp: "10:30 AM", unreadCount: 2 },
-  { id: 'convo2', name: 'Charlie Brown', lastMessage: "Sure, let's grab lunch next week.", timestamp: "Yesterday" },
+  { id: 'convo2', name: 'Charlie Brown', avatarUrl: 'https://placehold.co/50x50.png', lastMessage: "Sure, let's grab lunch next week.", timestamp: "Yesterday" },
   { id: 'convo3', name: 'Diana Prince', avatarUrl: 'https://placehold.co/50x50.png', lastMessage: "The Jazz Fest was amazing!", timestamp: "Mon" },
   { id: 'convo4', name: 'Support Team', avatarUrl: 'https://placehold.co/50x50.png', lastMessage: "Your pledge payout has been processed.", timestamp: "Last Week" },
 ];
@@ -46,7 +47,7 @@ export default function MessagesPage() {
                   <Link key={convo.id} href={`/messages/${convo.id}`} passHref>
                     <div className="flex items-center space-x-3 p-4 hover:bg-muted/50 transition-colors cursor-pointer">
                       <Avatar className="h-12 w-12">
-                        <AvatarImage src={convo.avatarUrl} alt={convo.name} data-ai-hint="profile person"/>
+                        <AvatarImage src={convo.avatarUrl} alt={convo.name} data-ai-hint="anime character"/>
                         <AvatarFallback>{convo.name.substring(0, 2).toUpperCase()}</AvatarFallback>
                       </Avatar>
                       <div className="flex-grow overflow-hidden">
@@ -74,3 +75,4 @@ export default function MessagesPage() {
     </AppLayout>
   );
 }
+

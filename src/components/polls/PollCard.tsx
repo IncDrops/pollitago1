@@ -59,7 +59,7 @@ export default function PollCard({ poll }: PollCardProps) {
         <div className="flex items-center space-x-3 mb-2">
           <Link href={poll.creator.profileUrl} passHref>
             <Avatar className="h-10 w-10 cursor-pointer">
-              <AvatarImage src={poll.creator.avatarUrl} alt={poll.creator.name} data-ai-hint="profile person" />
+              <AvatarImage src={poll.creator.avatarUrl} alt={poll.creator.name} data-ai-hint="anime character" />
               <AvatarFallback>{poll.creator.name.substring(0, 2).toUpperCase()}</AvatarFallback>
             </Avatar>
           </Link>
@@ -159,3 +159,4 @@ export default function PollCard({ poll }: PollCardProps) {
     </Card>
   );
 }
+

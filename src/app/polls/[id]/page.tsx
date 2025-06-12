@@ -92,7 +92,7 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
             <div className="flex items-start space-x-3 mb-3">
               <Link href={poll.creator.profileUrl} passHref>
                 <Avatar className="h-12 w-12 cursor-pointer">
-                  <AvatarImage src={poll.creator.avatarUrl} alt={poll.creator.name} data-ai-hint="profile person"/>
+                  <AvatarImage src={poll.creator.avatarUrl} alt={poll.creator.name} data-ai-hint="anime character"/>
                   <AvatarFallback>{poll.creator.name.substring(0, 2).toUpperCase()}</AvatarFallback>
                 </Avatar>
               </Link>
@@ -190,7 +190,7 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
                 {mockComments.map(comment => (
                   <div key={comment.id} className="flex items-start space-x-3">
                     <Avatar className="h-9 w-9">
-                      <AvatarImage src={comment.user.avatarUrl} alt={comment.user.name} data-ai-hint="profile person"/>
+                      <AvatarImage src={comment.user.avatarUrl} alt={comment.user.name} data-ai-hint="anime character"/>
                       <AvatarFallback>{comment.user.name.substring(0,1)}</AvatarFallback>
                     </Avatar>
                     <div className="bg-muted/50 p-3 rounded-lg flex-grow">
@@ -227,3 +227,4 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
     </AppLayout>
   );
 }
+

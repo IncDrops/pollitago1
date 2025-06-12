@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -46,7 +47,7 @@ export default function AdminSidebar() {
       <div className="p-4 border-t border-border">
         <div className="flex items-center space-x-3 mb-3">
           <Avatar>
-            <AvatarImage src="https://placehold.co/40x40.png" alt="Admin User" data-ai-hint="profile person"/>
+            <AvatarImage src="https://placehold.co/40x40.png" alt="Admin User" data-ai-hint="anime character"/>
             <AvatarFallback>AU</AvatarFallback>
           </Avatar>
           <div>
@@ -62,3 +63,4 @@ export default function AdminSidebar() {
     </aside>
   );
 }
+
