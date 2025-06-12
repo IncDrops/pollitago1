@@ -9,6 +9,18 @@ import { Button } from '@/components/ui/button';
 import { ThumbsUp, MessageSquare, ExternalLink, Video, Flame, Gift } from 'lucide-react';
 import { useCountdown } from '@/hooks/useCountdown';
 import { useState } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export interface PollOption {
   id: string;
@@ -48,9 +60,10 @@ interface PollCardProps {
 export default function PollCard({ poll }: PollCardProps) {
   const isTwoOptionPoll = poll.options.length === 2;
   const timeLeft = useCountdown(poll.endsAt);
+  const [tipAmount, setTipAmount] = useState('5.00');
 
-  const truncatedDescription = poll.description && poll.description.length > 140 
-    ? poll.description.substring(0, 140) + "..." 
+  const truncatedDescription = poll.description && poll.description.length > 140
+    ? poll.description.substring(0, 140) + "..."
     : poll.description;
 
   return (
@@ -121,7 +134,7 @@ export default function PollCard({ poll }: PollCardProps) {
             </Link>
           ))}
         </div>
-        
+
         {isTwoOptionPoll && (
           <div className="mt-3 text-center text-xs text-muted-foreground italic">
             Tap an option to vote or swipe (left for "{poll.options[0].text}", right for "{poll.options[1].text}").
@@ -129,8 +142,8 @@ export default function PollCard({ poll }: PollCardProps) {
         )}
       </CardContent>
 
-      <CardFooter className="p-4 flex justify-between items-center border-t border-border">
-        <div className="flex space-x-1 sm:space-x-3 items-center">
+      <CardFooter className="p-4 flex flex-wrap justify-between items-center border-t border-border gap-2">
+        <div className="flex space-x-1 sm:space-x-2 items-center">
           <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
             <ThumbsUp className="h-4 w-4 mr-1" /> {poll.totalVotes}
           </Button>
@@ -145,11 +158,55 @@ export default function PollCard({ poll }: PollCardProps) {
             </div>
           )}
         </div>
-        <Link href={`/polls/${poll.id}`} passHref>
-           <Button variant="outline" size="sm">
-            View Details <ExternalLink className="h-3 w-3 ml-1.5" />
-          </Button>
-        </Link>
+        <div className="flex items-center space-x-2">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                  <Gift className="h-4 w-4 mr-2" /> Tip {poll.creator.name} {poll.tipCount && poll.tipCount > 0 ? `(${poll.tipCount})` : ''}
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Tip {poll.creator.name}</DialogTitle>
+                <DialogDescription>
+                  Show your appreciation! Your tip (minimum $1.00) will go directly to {poll.creator.name}.
+                  PollItAGo takes a small platform fee.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor={`tipAmount-${poll.id}`} className="text-right">
+                    Amount
+                  </Label>
+                  <Input
+                    id={`tipAmount-${poll.id}`}
+                    type="number"
+                    value={tipAmount}
+                    onChange={(e) => setTipAmount(e.target.value)}
+                    placeholder="5.00"
+                    step="0.01"
+                    min="1.00"
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="p-4 border rounded-md bg-muted text-sm text-muted-foreground min-h-[100px] flex items-center justify-center">
+                  Stripe payment form will be embedded here.
+                </div>
+              </div>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button type="button" variant="outline">Cancel</Button>
+                </DialogClose>
+                <Button type="button" onClick={() => console.log(`Attempting to tip ${poll.creator.name} $${tipAmount} for poll ${poll.id}. Stripe processing to be implemented.`)}>Confirm Tip</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+          <Link href={`/polls/${poll.id}`} passHref>
+             <Button variant="outline" size="sm">
+              View Details <ExternalLink className="h-3 w-3 ml-1.5" />
+            </Button>
+          </Link>
+        </div>
       </CardFooter>
       {poll.pledgeAmount && poll.pledgeAmount > 0 && (
         <div className="px-4 py-2 bg-accent/20 text-center text-sm font-medium text-accent-foreground">
@@ -159,4 +216,3 @@ export default function PollCard({ poll }: PollCardProps) {
     </Card>
   );
 }
-

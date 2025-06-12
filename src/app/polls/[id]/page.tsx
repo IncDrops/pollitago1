@@ -11,8 +11,21 @@ import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, ThumbsUp, MessageSquare, ExternalLink, Video, CheckCircle, XCircle, Users, Flame, Gift, Link as LinkIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import type { Poll, PollOption, AffiliateLink } from '@/components/polls/PollCard'; 
-import { useCountdown } from '@/hooks/useCountdown'; 
+import type { Poll, PollOption, AffiliateLink } from '@/components/polls/PollCard';
+import { useCountdown } from '@/hooks/useCountdown';
+import { useState } from 'react'; // Added useState
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 // Mock poll data for detail view - In a real app, this would be fetched
 // For simplicity, let's assume we can find it in the mockPolls from PollFeed or define one here.
@@ -31,7 +44,7 @@ const mockPollsList: Poll[] = [ // A simplified list for finding the poll
     endsAt: new Date(Date.now() + 12 * 24 * 60 * 60 * 1000).toISOString(),
     totalVotes: 370,
     pledgeAmount: 50,
-    isSensitive: false, 
+    isSensitive: false,
     tipCount: 12,
     affiliateLinks: [
         { title: "Book Paris Hotels on Expedia", url: "https://www.expedia.com/Paris-Hotels.d178293.Travel-Guide-Hotels" },
@@ -41,7 +54,7 @@ const mockPollsList: Poll[] = [ // A simplified list for finding the poll
     // creatorDecision?: 'accepted' | 'rejected' // Assuming this is determined dynamically
   },
    {
-    id: '5', 
+    id: '5',
     creator: { name: 'Eve F.', avatarUrl: 'https://placehold.co/100x100.png', profileUrl: '/profile/eve' },
     question: 'Losing my virginity, condom or no condom?',
     description: "This is a big step for me and I want to make an informed decision. Safety vs. sensation, what are your thoughts? Poll ends in 7 days. I've linked some resources I found helpful below.",
@@ -76,6 +89,7 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
   const poll = mockPollsList.find(p => p.id === params.id) || mockPollsList[0]; // Fallback to first poll if not found
   const winningOption = poll.options.reduce((prev, current) => (prev.votes > current.votes) ? prev : current);
   const timeLeft = useCountdown(poll.endsAt);
+  const [tipAmount, setTipAmount] = useState('5.00'); // Added state for tip amount
   // Mocking creator decision for demonstration
   const creatorDecision: 'accepted' | 'rejected' | undefined = timeLeft === 'Ended' ? (Math.random() > 0.5 ? 'accepted' : 'rejected') : undefined;
 
@@ -165,12 +179,12 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
                 </div>
               </div>
             )}
-            
+
             {(poll.affiliateLinks && poll.affiliateLinks.length > 0) && (
               <>
                 <Separator />
                 <div>
-                    <h4 className="text-lg font-semibold mb-2">Related Products/Services:</h4>
+                    <h4 className="text-lg font-semibold my-3">Related Products/Services:</h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {poll.affiliateLinks.map((link, index) => (
                             <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 p-3 border rounded-md hover:bg-muted/50 transition-colors">
@@ -217,9 +231,48 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
               <Button variant="secondary">
                 <ThumbsUp className="h-4 w-4 mr-2" /> Like Poll
               </Button>
-              <Button variant="outline" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                  <Gift className="h-4 w-4 mr-2" /> Tip {poll.creator.name} {poll.tipCount && poll.tipCount > 0 ? `(${poll.tipCount})` : ''}
-              </Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                      <Gift className="h-4 w-4 mr-2" /> Tip {poll.creator.name} {poll.tipCount && poll.tipCount > 0 ? `(${poll.tipCount})` : ''}
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Tip {poll.creator.name}</DialogTitle>
+                    <DialogDescription>
+                      Show your appreciation! Your tip (minimum $1.00) will go directly to {poll.creator.name}.
+                      PollItAGo takes a small platform fee.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor={`tipAmount-detail-${poll.id}`} className="text-right">
+                        Amount
+                      </Label>
+                      <Input
+                        id={`tipAmount-detail-${poll.id}`}
+                        type="number"
+                        value={tipAmount}
+                        onChange={(e) => setTipAmount(e.target.value)}
+                        placeholder="5.00"
+                        step="0.01"
+                        min="1.00"
+                        className="col-span-3"
+                      />
+                    </div>
+                    <div className="p-4 border rounded-md bg-muted text-sm text-muted-foreground min-h-[100px] flex items-center justify-center">
+                      Stripe payment form will be embedded here.
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button type="button" variant="outline">Cancel</Button>
+                    </DialogClose>
+                    <Button type="button" onClick={() => console.log(`Attempting to tip ${poll.creator.name} $${tipAmount} for poll ${poll.id} from detail page. Stripe processing to be implemented.`)}>Confirm Tip</Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </div>
           </CardFooter>
         </Card>
@@ -227,4 +280,3 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
     </AppLayout>
   );
 }
-
