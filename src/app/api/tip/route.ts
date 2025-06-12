@@ -1,57 +1,74 @@
 
 import { type NextRequest, NextResponse } from 'next/server';
+import Stripe from 'stripe';
 
-// This is a placeholder API route.
-// In a real application, this route would:
-// 1. Authenticate the user making the tip.
-// 2. Validate the input (amount, recipientId, pollId).
-// 3. Interact with the Stripe API (server-side SDK) to create a PaymentIntent.
-//    - This would involve using your Stripe SECRET KEY securely on the server.
-//    - It would calculate platform fees, determine the amount for the recipient, etc.
-// 4. If the PaymentIntent is created successfully, it would return the `client_secret` of the PaymentIntent.
-// 5. After successful payment confirmation (via Stripe webhooks or client-side confirmation polling),
-//    it would credit the recipient with "PollitPoints" in your database.
+// Ensure your Stripe Secret Key is set in your environment variables
+// For local development, set it in .env.local: STRIPE_SECRET_KEY=sk_test_YOUR_KEY
+// For deployment, set it in your Firebase App Hosting environment configuration.
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+
+if (!stripeSecretKey) {
+  console.error("Stripe secret key is not set. Please set STRIPE_SECRET_KEY environment variable.");
+  // We don't throw here to allow the server to start, but API calls will fail.
+}
+
+// Initialize Stripe with the secret key and a specific API version
+const stripe = stripeSecretKey ? new Stripe(stripeSecretKey, {
+  apiVersion: '2024-06-20', // Use the latest API version or one you're tested against
+  typescript: true,
+}) : null;
+
 
 export async function POST(request: NextRequest) {
+  if (!stripe) {
+    console.error('Stripe SDK not initialized because secret key is missing.');
+    return NextResponse.json({ error: 'Stripe is not configured on the server.' }, { status: 500 });
+  }
+
   try {
     const body = await request.json();
     const { amount, recipientId, pollId } = body;
 
-    if (!amount || !recipientId || !pollId) {
-      return NextResponse.json({ error: 'Missing amount, recipientId, or pollId' }, { status: 400 });
+    if (!amount || typeof amount !== 'number' || amount < 100) { // Stripe expects amount in cents, min $1.00 for most cards
+      return NextResponse.json({ error: 'Invalid amount. Minimum tip is $1.00 (100 cents).' }, { status: 400 });
+    }
+    if (!recipientId) {
+      return NextResponse.json({ error: 'Missing recipientId' }, { status: 400 });
+    }
+    if (!pollId) {
+      return NextResponse.json({ error: 'Missing pollId' }, { status: 400 });
     }
 
-    // Simulate backend processing
-    console.log(`Placeholder API: Received tip attempt:`);
-    console.log(`  Amount (smallest unit): ${amount}`);
-    console.log(`  Recipient ID: ${recipientId}`);
-    console.log(`  Poll ID: ${pollId}`);
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount, // Amount in cents
+      currency: 'usd',
+      // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
+      automatic_payment_methods: {
+        enabled: true,
+      },
+      metadata: {
+        recipientId: String(recipientId), // Ensure metadata values are strings
+        pollId: String(pollId),
+        // You can add more metadata here if needed
+      },
+      // You could add application_fee_amount here if PollItAGo takes a cut
+      // and you are using Stripe Connect with the recipientId as a connected account.
+      // For simplicity, we'll assume PollItAGo collects the funds first.
+    });
 
-    // In a real scenario, you'd create a Stripe PaymentIntent here
-    // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-    // const paymentIntent = await stripe.paymentIntents.create({
-    //   amount: amount,
-    //   currency: 'usd',
-    //   // application_fee_amount: calculatePlatformFee(amount), // Example
-    //   // transfer_data: { // Example for Stripe Connect
-    //   //  destination: recipientStripeAccountId,
-    //   // },
-    //   metadata: { recipientId, pollId },
-    // });
-    // const clientSecret = paymentIntent.client_secret;
+    console.log(`API: Created PaymentIntent ${paymentIntent.id} for poll ${pollId}, recipient ${recipientId}, amount ${amount}`);
 
-    // For now, return a mock client_secret
-    // The format 'pi_...' is typical for PaymentIntent IDs, and Stripe.js
-    // might have some client-side validation for this format.
-    // Appending a timestamp ensures it's unique for each call during simulation.
-    const mockClientSecret = `pi_mock_${Date.now()}_secret_${Math.random().toString(36).substring(7)}`;
-
-    console.log(`Placeholder API: Returning mock clientSecret: ${mockClientSecret}`);
-
-    return NextResponse.json({ clientSecret: mockClientSecret });
+    return NextResponse.json({
+      clientSecret: paymentIntent.client_secret,
+    });
 
   } catch (error: any) {
-    console.error('Placeholder API /api/tip Error:', error);
-    return NextResponse.json({ error: error.message || 'An unexpected error occurred.' }, { status: 500 });
+    console.error('API /api/tip Error:', error);
+    let errorMessage = 'An unexpected error occurred.';
+    if (error instanceof Stripe.errors.StripeError) {
+        errorMessage = error.message;
+    }
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
