@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAuth } from '@/context/AuthContext';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { db } from '@/lib/firestore';
 
 // Mock user data
 const userProfileCreator: PollCreator = {
@@ -68,6 +68,7 @@ const userPolls: Poll[] = [
   },
 ];
 
+interface UserProfileData {
   fullName: string;
   username: string;
   dateOfBirth: string; // Or Date type if you prefer
@@ -76,7 +77,6 @@ const userPolls: Poll[] = [
   isDobPublic: boolean;
   // Add other user fields as needed
 }
-
 
 export default function ProfilePage() {
   const { user } = useAuth();
@@ -103,12 +103,24 @@ export default function ProfilePage() {
     }));
   };
 
+  const handleGenderChange = (value: string) => {
+    setProfileData(prevData => ({
+      ...prevData,
+      gender: value,
+    }));
+  };
+
   const handleSave = async () => {
     if (user) {
       const userDocRef = doc(db, 'users', user.uid);
       await updateDoc(userDocRef, { ...profileData });
     }
   };
+
+
+
+
+
   return (
     <AppLayout>
       <div className="container mx-auto px-4 py-8">
@@ -164,7 +176,7 @@ export default function ProfilePage() {
                 </div>
                 <div>
                   <Label htmlFor="gender">Gender</Label>
-                  <Select name="gender" value={profileData.gender} onValueChange={(value) => handleInputChange({ target: { name: 'gender', value, type: 'select' } } as React.ChangeEvent<HTMLSelectElement>)}>
+                  <Select name="gender" value={profileData.gender} onValueChange={handleGenderChange}>
                     <SelectTrigger id="gender">
                       <SelectValue placeholder="Select gender" />
                     </SelectTrigger>
