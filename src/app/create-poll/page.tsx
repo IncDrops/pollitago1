@@ -5,8 +5,9 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { PlusCircle, ImagePlus, Video, CalendarDays, DollarSign } from 'lucide-react';
+import { PlusCircle, ImagePlus, Video, CalendarDays, DollarSign, Info } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
 
 export default function CreatePollPage() {
   return (
@@ -22,13 +23,20 @@ export default function CreatePollPage() {
               <Textarea id="question" placeholder="e.g., Which movie should I watch tonight?" className="mt-1 min-h-[80px]" />
             </div>
 
+            <div>
+              <Label htmlFor="description" className="text-lg">Description (Optional)</Label>
+              <Textarea id="description" placeholder="Add more context or details to your poll (max 365 characters)." className="mt-1 min-h-[100px]" maxLength={365} />
+               <p className="text-xs text-muted-foreground mt-1">Provide background, explain your dilemma, or add fun details.</p>
+            </div>
+
+
             <div className="space-y-3">
-              <Label className="text-lg">Options (up to 4)</Label>
+              <Label className="text-lg">Options (2 to 4)</Label>
               {[1, 2].map((i) => ( 
                 <div key={i} className="space-y-2 p-3 border rounded-md">
                   <Input placeholder={`Option ${i}`} />
                   <div className="flex space-x-2">
-                    <Button variant="outline" size="sm"><ImagePlus className="mr-2 h-4 w-4" /> Add Image (Max 2)</Button>
+                    <Button variant="outline" size="sm"><ImagePlus className="mr-2 h-4 w-4" /> Add Image (Max 2 per option)</Button>
                   </div>
                 </div>
               ))}
@@ -93,8 +101,21 @@ export default function CreatePollPage() {
                   <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input id="pledge" type="number" placeholder="0.00" className="pl-8" />
                 </div>
-                <p className="text-xs text-muted-foreground mt-1">Commit to your decision!</p>
+                <p className="text-xs text-muted-foreground mt-1">Commit to your decision! If you go against the poll, pledge gets distributed.</p>
               </div>
+            </div>
+             <div className="space-y-2">
+                <Label className="text-lg">Additional Settings</Label>
+                <div className="flex items-center space-x-2">
+                    <Checkbox id="isSensitive" />
+                    <Label htmlFor="isSensitive" className="text-sm font-normal">
+                        Mark as sensitive content (e.g., NSFW, adult themes)
+                    </Label>
+                </div>
+                 <div className="p-2 bg-muted/50 rounded-md text-xs text-muted-foreground flex items-start space-x-2">
+                    <Info className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary"/>
+                    <span>Polls marked sensitive will display a <Flame className="inline h-3 w-3 text-destructive"/> icon and may be subject to stricter moderation.</span>
+                 </div>
             </div>
           </CardContent>
           <CardFooter>
