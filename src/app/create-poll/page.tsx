@@ -1,3 +1,4 @@
+
 import AppLayout from '@/components/layout/AppLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -5,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { PlusCircle, ImagePlus, Video, CalendarDays, DollarSign } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export default function CreatePollPage() {
   return (
@@ -22,7 +24,7 @@ export default function CreatePollPage() {
 
             <div className="space-y-3">
               <Label className="text-lg">Options (up to 4)</Label>
-              {[1, 2].map((i) => ( // Show 2 options by default, allow adding more
+              {[1, 2].map((i) => ( 
                 <div key={i} className="space-y-2 p-3 border rounded-md">
                   <Input placeholder={`Option ${i}`} />
                   <div className="flex space-x-2">
@@ -40,10 +42,51 @@ export default function CreatePollPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="duration" className="text-lg">Poll Duration</Label>
-                <Input id="duration" type="text" placeholder="e.g., 24 hours, 7 days" className="mt-1" />
-                 <p className="text-xs text-muted-foreground mt-1">From 1 minute to 31 days.</p>
+                <Label className="text-lg mb-1 block">Poll Duration</Label>
+                <div className="grid grid-cols-3 gap-2">
+                  <div>
+                    <Label htmlFor="duration-days" className="text-xs">Days</Label>
+                    <Select defaultValue="0">
+                      <SelectTrigger id="duration-days">
+                        <SelectValue placeholder="Days" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Array.from({ length: 32 }, (_, i) => ( // 0 to 31 days
+                          <SelectItem key={`days-${i}`} value={String(i)}>{i}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label htmlFor="duration-hours" className="text-xs">Hours</Label>
+                    <Select defaultValue="0">
+                      <SelectTrigger id="duration-hours">
+                        <SelectValue placeholder="Hours" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Array.from({ length: 24 }, (_, i) => ( // 0 to 23 hours
+                          <SelectItem key={`hours-${i}`} value={String(i)}>{i}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label htmlFor="duration-minutes" className="text-xs">Minutes</Label>
+                    <Select defaultValue="1"> {/* Default to 1 minute */}
+                      <SelectTrigger id="duration-minutes">
+                        <SelectValue placeholder="Minutes" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Array.from({ length: 60 }, (_, i) => ( // 0 to 59 minutes
+                          <SelectItem key={`minutes-${i}`} value={String(i)}>{i}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground mt-1">Min 1 minute, Max 31 days.</p>
               </div>
+
               <div>
                 <Label htmlFor="pledge" className="text-lg">Pledge Amount (Optional)</Label>
                 <div className="relative mt-1">

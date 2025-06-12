@@ -1,3 +1,4 @@
+
 import AdminLayout from '../layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,10 +16,11 @@ import {
 import Link from 'next/link';
 
 const mockPollsData = [
-  { id: 'poll1', question: "Engagement location: Paris or Italy?", creator: "Alice W.", votes: 370, status: 'Active', createdAt: '2024-07-28', flagged: false },
-  { id: 'poll2', question: "Which house to buy? A or B?", creator: "Bob B.", votes: 165, status: 'Ended', createdAt: '2024-07-25', flagged: true },
-  { id: 'poll3', question: "What to eat for lunch?", creator: "Charlie B.", votes: 150, status: 'Active', createdAt: '2024-07-29', flagged: false },
-  { id: 'poll4', question: "Should I quit my job?", creator: "Eve F.", votes: 520, status: 'Active', createdAt: '2024-07-20', flagged: false, isSensitive: true },
+  { id: 'poll1', question: "Engagement location: Paris or Italy?", creator: "Alice W.", votes: 370, status: 'Active', createdAt: '2024-07-28', flagged: false, isSensitive: false },
+  { id: 'poll2', question: "Which house to buy? A or B?", creator: "Bob B.", votes: 165, status: 'Ended', createdAt: '2024-07-25', flagged: true, isSensitive: false },
+  { id: 'poll3', question: "What to eat for lunch?", creator: "Charlie B.", votes: 150, status: 'Active', createdAt: '2024-07-29', flagged: false, isSensitive: false },
+  { id: 'poll4', question: "Should I quit my job?", creator: "Eve F.", votes: 520, status: 'Active', createdAt: '2024-07-20', flagged: false, isSensitive: false },
+  { id: 'poll5', question: "Losing my virginity, condom or no condom?", creator: "Sensitive Sam", votes: 100, status: 'Active', createdAt: '2024-07-21', flagged: true, isSensitive: true },
 ];
 
 export default function AdminPollsManagementPage() {
@@ -55,7 +57,7 @@ export default function AdminPollsManagementPage() {
               </TableHeader>
               <TableBody>
                 {mockPollsData.map((poll) => (
-                  <TableRow key={poll.id} className={poll.flagged ? 'bg-red-500/10 hover:bg-red-500/20' : ''}>
+                  <TableRow key={poll.id} className={(poll.flagged || poll.isSensitive) ? 'bg-red-500/10 hover:bg-red-500/20' : ''}>
                     <TableCell className="font-medium max-w-xs truncate">
                       {poll.isSensitive && <ShieldAlert className="h-4 w-4 inline-block mr-1 text-yellow-500" titleAccess="Sensitive Content"/>}
                       {poll.question}
@@ -82,7 +84,7 @@ export default function AdminPollsManagementPage() {
                           </DropdownMenuItem>
                           <DropdownMenuItem><Edit className="mr-2 h-4 w-4" /> Edit Poll (Content)</DropdownMenuItem>
                           <DropdownMenuSeparator />
-                          {poll.flagged ? (
+                          {poll.flagged || poll.isSensitive ? (
                              <DropdownMenuItem className="text-green-600 focus:text-green-700 focus:bg-green-100">
                                 <ShieldCheck className="mr-2 h-4 w-4" /> Mark as Safe
                              </DropdownMenuItem>
@@ -110,3 +112,4 @@ export default function AdminPollsManagementPage() {
     </AdminLayout>
   );
 }
+

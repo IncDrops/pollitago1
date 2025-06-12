@@ -1,9 +1,13 @@
+
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { ThumbsUp, ThumbsDown, MessageSquare, ExternalLink, Video } from 'lucide-react';
+import { ThumbsUp, MessageSquare, ExternalLink, Video, Flame } from 'lucide-react';
+import { useCountdown } from '@/hooks/useCountdown';
 
 export interface PollOption {
   id: string;
@@ -22,9 +26,10 @@ export interface Poll {
   question: string;
   options: PollOption[];
   videoUrl?: string; // URL for up to 60s video
-  endsAt: string; // ISO string or human-readable
+  endsAt: string; // ISO string
   pledgeAmount?: number;
   totalVotes: number;
+  isSensitive?: boolean; // Flag for NSFW/spicy content
 }
 
 interface PollCardProps {
@@ -33,6 +38,7 @@ interface PollCardProps {
 
 export default function PollCard({ poll }: PollCardProps) {
   const isTwoOptionPoll = poll.options.length === 2;
+  const timeLeft = useCountdown(poll.endsAt);
 
   return (
     <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -48,12 +54,15 @@ export default function PollCard({ poll }: PollCardProps) {
             <Link href={poll.creator.profileUrl} passHref>
               <p className="font-semibold text-sm hover:underline cursor-pointer">{poll.creator.name}</p>
             </Link>
-            <p className="text-xs text-muted-foreground">Ends: {new Date(poll.endsAt).toLocaleDateString()}</p>
+            <p className="text-xs text-muted-foreground">
+              {timeLeft === 'Ended' ? 'Poll Ended' : `Ends in: ${timeLeft}`}
+            </p>
           </div>
         </div>
         <Link href={`/polls/${poll.id}`} passHref>
-          <CardTitle className="text-lg leading-tight cursor-pointer hover:text-primary transition-colors">
-            {poll.question}
+          <CardTitle className="text-lg leading-tight cursor-pointer hover:text-primary transition-colors flex items-center">
+            {poll.isSensitive && <Flame className="h-4 w-4 mr-1.5 text-destructive flex-shrink-0" />}
+            <span>{poll.question}</span>
           </CardTitle>
         </Link>
       </CardHeader>

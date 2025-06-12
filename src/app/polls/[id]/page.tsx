@@ -1,3 +1,6 @@
+
+"use client";
+
 import AppLayout from '@/components/layout/AppLayout';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -5,10 +8,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Progress } from '@/components/ui/progress';
 import { Textarea } from '@/components/ui/textarea';
 import { Separator } from '@/components/ui/separator';
-import { ArrowLeft, ThumbsUp, MessageSquare, ExternalLink, Video, CheckCircle, XCircle, Users } from 'lucide-react';
+import { ArrowLeft, ThumbsUp, MessageSquare, ExternalLink, Video, CheckCircle, XCircle, Users, Flame } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Poll, PollOption } from '@/components/polls/PollCard'; // Re-use types
+import { useCountdown } from '@/hooks/useCountdown'; // Import useCountdown
 
 // Mock poll data for detail view
 const mockPollDetail: Poll & { comments: any[], creatorDecision?: 'accepted' | 'rejected' } = {
@@ -23,6 +27,7 @@ const mockPollDetail: Poll & { comments: any[], creatorDecision?: 'accepted' | '
   endsAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
   totalVotes: 370,
   pledgeAmount: 50,
+  isSensitive: false, // Example, adjust as needed
   creatorDecision: 'accepted', // or 'rejected' or undefined if poll active
   comments: [
     { id: 'c1', user: { name: 'Bob', avatarUrl: 'https://placehold.co/40x40.png' }, text: 'Italy for sure! The romance is unmatched.', timestamp: '2d ago' },
@@ -36,8 +41,11 @@ const getVotePercentage = (votes: number, totalVotes: number) => {
 };
 
 export default function PollDetailPage({ params }: { params: { id: string } }) {
-  const poll = mockPollDetail; // In a real app, fetch poll by params.id
+  // In a real app, fetch poll by params.id. For now, use mock or find from PollFeed's mockPolls.
+  // This example uses a static mockPollDetail. For dynamic content, you'd fetch based on params.id.
+  const poll = mockPollDetail; 
   const winningOption = poll.options.reduce((prev, current) => (prev.votes > current.votes) ? prev : current);
+  const timeLeft = useCountdown(poll.endsAt);
 
   return (
     <AppLayout>
@@ -59,10 +67,15 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
                 <Link href={poll.creator.profileUrl} passHref>
                   <p className="font-semibold text-lg hover:underline cursor-pointer">{poll.creator.name}</p>
                 </Link>
-                <p className="text-sm text-muted-foreground">Ends: {new Date(poll.endsAt).toLocaleString()}</p>
+                <p className="text-sm text-muted-foreground">
+                  {timeLeft === 'Ended' ? 'Poll Ended' : `Ends in: ${timeLeft}`}
+                </p>
               </div>
             </div>
-            <CardTitle className="text-2xl font-bold font-headline">{poll.question}</CardTitle>
+            <CardTitle className="text-2xl font-bold font-headline flex items-center">
+              {poll.isSensitive && <Flame className="h-5 w-5 mr-2 text-destructive flex-shrink-0" />}
+              <span>{poll.question}</span>
+            </CardTitle>
             {poll.pledgeAmount && (
               <CardDescription className="text-base text-accent font-medium">Pledge: ${poll.pledgeAmount.toFixed(2)}</CardDescription>
             )}
@@ -73,7 +86,6 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
               <div className="rounded-lg overflow-hidden aspect-video bg-muted flex items-center justify-center text-muted-foreground border">
                 <Video className="w-16 h-16 text-primary" />
                 <span className="ml-3 text-lg">Watch video context</span>
-                {/* Placeholder - In real app, clicking this would play the video in a modal or inline */}
               </div>
             )}
 
@@ -112,7 +124,6 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
             
             <Separator />
 
-            {/* Affiliate Links Section Placeholder */}
             <div>
                 <h4 className="text-lg font-semibold mb-2">Related Products/Services:</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -127,7 +138,7 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
                 </div>
             </div>
              <Separator />
-            {/* Comments Section */}
+
             <div id="comments">
               <h4 className="text-xl font-semibold mb-3">Comments ({poll.comments.length})</h4>
               <div className="space-y-4 mb-4">
@@ -160,7 +171,6 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
             <Button variant="secondary">
               <ThumbsUp className="h-4 w-4 mr-2" /> Like Poll
             </Button>
-            {/* Tip Creator Button Placeholder */}
             <Button variant="outline" className="bg-accent hover:bg-accent/90 text-accent-foreground">
                 Tip {poll.creator.name}
             </Button>
