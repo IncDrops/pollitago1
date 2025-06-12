@@ -59,7 +59,7 @@ export default function AdminPollsManagementPage() {
                 {mockPollsData.map((poll) => (
                   <TableRow key={poll.id} className={(poll.flagged || poll.isSensitive) ? 'bg-red-500/10 hover:bg-red-500/20' : ''}>
                     <TableCell className="font-medium max-w-xs truncate">
-                      {poll.isSensitive && <ShieldAlert className="h-4 w-4 inline-block mr-1 text-yellow-500" titleAccess="Sensitive Content"/>}
+                      {poll.isSensitive && <ShieldAlert className="h-4 w-4 inline-block mr-1 text-yellow-500" title="Sensitive Content"/>}
                       {poll.question}
                     </TableCell>
                     <TableCell>{poll.creator}</TableCell>
@@ -112,4 +112,3 @@ export default function AdminPollsManagementPage() {
     </AdminLayout>
   );
 }
-

@@ -106,7 +106,7 @@ export default function PollDetailPage({ params }: { params: { id: string } }) {
               </div>
             </div>
             <CardTitle className="text-2xl font-bold font-headline flex items-center">
-              {poll.isSensitive && <Flame className="h-5 w-5 mr-2 text-destructive flex-shrink-0" titleAccess="Sensitive Content"/>}
+              {poll.isSensitive && <Flame className="h-5 w-5 mr-2 text-destructive flex-shrink-0" title="Sensitive Content"/>}
               <span>{poll.question}</span>
             </CardTitle>
             {poll.pledgeAmount && (

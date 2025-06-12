@@ -48,7 +48,6 @@ interface PollCardProps {
 export default function PollCard({ poll }: PollCardProps) {
   const isTwoOptionPoll = poll.options.length === 2;
   const timeLeft = useCountdown(poll.endsAt);
-  const [showFullDescription, setShowFullDescription] = useState(false);
 
   const truncatedDescription = poll.description && poll.description.length > 140 
     ? poll.description.substring(0, 140) + "..." 
@@ -75,7 +74,7 @@ export default function PollCard({ poll }: PollCardProps) {
         </div>
         <Link href={`/polls/${poll.id}`} passHref>
           <CardTitle className="text-lg leading-tight cursor-pointer hover:text-primary transition-colors flex items-center">
-            {poll.isSensitive && <Flame className="h-4 w-4 mr-1.5 text-destructive flex-shrink-0" titleAccess="Sensitive Content"/>}
+            {poll.isSensitive && <Flame className="h-4 w-4 mr-1.5 text-destructive flex-shrink-0" title="Sensitive Content"/>}
             <span>{poll.question}</span>
           </CardTitle>
         </Link>
