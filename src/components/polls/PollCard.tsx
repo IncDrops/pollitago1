@@ -132,7 +132,7 @@ export default function PollCard({ poll }: PollCardProps) {
                     <div className={`grid ${option.images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'} gap-1 mt-1 mb-2`}>
                       {option.images.map((imgUrl, idx) => (
                         <div key={idx} className="relative aspect-square rounded overflow-hidden border">
-                          <Image src={imgUrl} alt={`${option.text} image ${idx + 1}`} layout="fill" objectFit="cover" data-ai-hint="poll option" />
+                          <Image src={imgUrl} alt={`${option.text} image ${idx + 1}`} layout="fill" objectFit="cover" sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 50vw" data-ai-hint="poll option" />
                         </div>
                       ))}
                     </div>

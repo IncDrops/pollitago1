@@ -1,11 +1,17 @@
 
+"use client";
+
 import AppLayout from '@/components/layout/AppLayout';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Edit3, Users, BarChart3 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import PollCard, { type Poll, type PollCreator } from '@/components/polls/PollCard'; // Re-use PollCard for displaying user's polls
+import { useAuth } from '@/context/AuthContext';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 // Mock user data
 const userProfileCreator: PollCreator = {
@@ -59,8 +65,34 @@ const userPolls: Poll[] = [
   },
 ];
 
+interface UserProfileData {
+  fullName: string;
+  username: string;
+  dateOfBirth: string; // Or Date type if you prefer
+  gender: string;
+  isAgePublic: boolean;
+  isDobPublic: boolean;
+  // Add other user fields as needed
+}
+
 
 export default function ProfilePage() {
+  const { user } = useAuth();
+  const [profileData, setProfileData] = useState<UserProfileData | null>(null);
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      if (user) {
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          setProfileData(userDocSnap.data() as UserProfileData);
+        }
+      }
+    };
+    fetchProfileData();
+  }, [user]);
+
   return (
     <AppLayout>
       <div className="container mx-auto px-4 py-8">
