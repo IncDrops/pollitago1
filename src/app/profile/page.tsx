@@ -2,6 +2,7 @@
 "use client";
 
 import AppLayout from '@/components/layout/AppLayout';
+import { Label } from '@/components/ui/label';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -9,8 +10,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Edit3, Users, BarChart3 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import PollCard, { type Poll, type PollCreator } from '@/components/polls/PollCard'; // Re-use PollCard for displaying user's polls
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAuth } from '@/context/AuthContext';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 // Mock user data
@@ -65,7 +68,6 @@ const userPolls: Poll[] = [
   },
 ];
 
-interface UserProfileData {
   fullName: string;
   username: string;
   dateOfBirth: string; // Or Date type if you prefer
@@ -78,7 +80,7 @@ interface UserProfileData {
 
 export default function ProfilePage() {
   const { user } = useAuth();
-  const [profileData, setProfileData] = useState<UserProfileData | null>(null);
+  const [profileData, setProfileData] = useState<UserProfileData>({ fullName: '', username: '', dateOfBirth: '', gender: '', isAgePublic: false, isDobPublic: false });
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -93,6 +95,20 @@ export default function ProfilePage() {
     fetchProfileData();
   }, [user]);
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    setProfileData(prevData => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
+    }));
+  };
+
+  const handleSave = async () => {
+    if (user) {
+      const userDocRef = doc(db, 'users', user.uid);
+      await updateDoc(userDocRef, { ...profileData });
+    }
+  };
   return (
     <AppLayout>
       <div className="container mx-auto px-4 py-8">
@@ -129,6 +145,51 @@ export default function ProfilePage() {
                 <p className="text-sm text-muted-foreground">Following</p>
               </div>
             </div>
+
+            {/* Edit Profile Section */}
+            <div className="mb-6 border-t pt-6">
+              <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="fullName">Full Name</Label>
+                  <Input id="fullName" name="fullName" value={profileData.fullName} onChange={handleInputChange} />
+                </div>
+                <div>
+                  <Label htmlFor="username">Username</Label>
+                  <Input id="username" name="username" value={profileData.username} onChange={handleInputChange} />
+                </div>
+                <div>
+                  <Label htmlFor="dateOfBirth">Date of Birth</Label>
+                  <Input id="dateOfBirth" name="dateOfBirth" type="date" value={profileData.dateOfBirth} onChange={handleInputChange} />
+                </div>
+                <div>
+                  <Label htmlFor="gender">Gender</Label>
+                  <Select name="gender" value={profileData.gender} onValueChange={(value) => handleInputChange({ target: { name: 'gender', value, type: 'select' } } as React.ChangeEvent<HTMLSelectElement>)}>
+                    <SelectTrigger id="gender">
+                      <SelectValue placeholder="Select gender" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Male">Male</SelectItem>
+                      <SelectItem value="Female">Female</SelectItem>
+                      <SelectItem value="Non-binary">Non-binary</SelectItem>
+                      <SelectItem value="Custom">Custom</SelectItem>
+                      <SelectItem value="Prefer not to say">Prefer not to say</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <input type="checkbox" id="isAgePublic" name="isAgePublic" checked={profileData.isAgePublic} onChange={handleInputChange} />
+                  <Label htmlFor="isAgePublic">Make age public</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <input type="checkbox" id="isDobPublic" name="isDobPublic" checked={profileData.isDobPublic} onChange={handleInputChange} />
+                  <Label htmlFor="isDobPublic">Make date of birth public</Label>
+                </div>
+              </div>
+              <Button className="mt-4" onClick={handleSave}>Save Changes</Button>
+            </div>
+
+
 
             {/* Affiliate Placements */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
